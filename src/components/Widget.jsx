@@ -208,7 +208,8 @@ function Widget() {
                   backgroundColor: "#fff",
                   padding: "2rem",
                   borderRadius: 4,
-                  boxShadow: 3,
+                  boxShadow:
+                    "rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;",
                   zIndex: 999,
                 }}
               >
