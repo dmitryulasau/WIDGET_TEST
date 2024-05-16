@@ -1,0 +1,89 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5% !important;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  height: 100%;
+}
+
+body {
+  font-family: "Montserrat", sans-serif;
+
+  line-height: 1;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  height: 100%;
+}
+
+body::-webkit-scrollbar {
+  width: 0;
+}
+img {
+  border-style: none;
+}
+
+button,
+input,
+textarea {
+  font-family: inherit;
+  font-size: 100%;
+  line-height: 1.15;
+  margin: 0;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:visited,
+a:active,
+a:link {
+  color: var(--white);
+}
+
+/* COLORS */
+:root {
+  --primary-color: #1587b9;
+  --secondary-color: #6d5fde;
+  --blue: #45addb;
+  --bg-light: #9dd9f4;
+  --white: #fff;
+  --black: #000;
+  --error-color: #e73f46;
+}
+
+/* @font-face {
+  font-family: "Yaro Rg Thin";
+  src: url("/fonts/YaroRg-Thin.woff2") format("woff2"),
+    url("/fonts/YaroRg-Thin.woff") format("woff"),
+    url("/fonts/YaroRg-Thin.ttf") format("truetype"),
+    url("/fonts/YaroRg-Thin.eot") format("eot");
+}
+
+@font-face {
+  font-family: "Yaro Rg";
+  src: url("/fonts/YaroRg.woff2") format("woff2"),
+    url("/fonts/YaroRg.woff") format("woff"),
+    url("/fonts/YaroRg.ttf") format("truetype"),
+    url("/fonts/YaroRg.eot") format("eot");
+}
+
+@font-face {
+  font-family: "Yaro Op Thin";
+  src: url("/fonts/YaroOp-Thin.woff2") format("woff2"),
+    url("/fonts/YaroOp-Thin.woff") format("woff"),
+    url("/fonts/YaroOp-Thin.ttf") format("truetype"),
+    url("/fonts/YaroOp-Thin.eot") format("eot");
+} */

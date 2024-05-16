@@ -1,0 +1,3 @@
+# GoMedCZ
+
+`npm run dev`

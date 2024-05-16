@@ -1,0 +1,64 @@
+{
+  "navbar.home": "Home",
+  "navbar.why": "Patient's Journey",
+  "navbar.services": "About Us",
+  "navbar.contact": "Contact Us",
+
+  "hero.title": "Experience prompt healthcare with",
+  "hero.text": "Say goodbye to the long, anxiety-filled waits for medical appointments.",
+  "hero.text2": "With Gomed, we ensure you see a doctor within a maximum of three days. Quick, efficient healthcare – that's what we're all about.",
+
+  "ctaform.title": "Limited Offer: 70% off your first appointment!",
+  "ctaform.email": "Email Address",
+  "ctaform.phone": "Phone Number",
+  "ctaform.insurance": "Your Medical Insurance",
+  "ctaform.specialist": "Specialists You Need?",
+  "ctaform.submit": "Join our priority waitlist",
+  "ctaform.privacy": "I have read and agree to the ",
+  "ctaform.privacy2": "privacy policy",
+
+  "why.title": "Why choose Gomed?",
+  "why.subtitle": "Urgent Care at Your Fingertips:",
+  "why.subtitle2": "Fast, Reliable, Personalized",
+  "why.reason1": "Speedy Healthcare",
+  "why.reason1text": "Gomed values your time. Get the medical care you need, fast. No more waiting for urgent care.",
+  "why.reason2": "Flexible Options",
+  "why.reason2text": "Pick your healthcare plan like a ride. 'Economy' for an appointment within 48 hours, 'Premium' for same-day consultation. Your health, your way.",
+  "why.reason3": "Trusted Professionals",
+  "why.reason3text": "Our network is your advantage. Only the best doctors, ready for quick appointments. Every visit promises quality care.",
+
+  "revolution.title": "#HEALTHCAREREVOLUTION",
+  "revolution.subtitle": "Gomed. Your Health, Accelerated.",
+  "revolution.text": "Step into a new chapter of healthcare. Join our waitlist today and be among the first to embrace a service that values your health as much as your time.",
+
+  "join.title": "Ready to Prioritize Your Health and Time?",
+  "join.subtitle": "Join Our Waitlist Now",
+
+  "contact.title": "Have any questions? Contact us!",
+  "contact.subtitle": "Reach out to us directly at ",
+
+  "footer.privacyPolicy": "Privacy Policy",
+  "footer.stickers": "Stickers designed by kerismaker from Flaticon",
+  "footer.language": "Language",
+
+  "validation.email.required": "Email is required",
+  "validation.email.invalid": "Please enter a valid email address",
+
+  "validation.phone.required": "Phone number is required",
+  "validation.phone.invalid": "Phone should be 9 digits",
+
+  "validation.insurance.required": "Please choose your medical insurance",
+
+  "validation.specialist.required": "Please choose specialists",
+
+  "ctaform.privacyError": "Please agree to the privacy policy",
+
+  "widget.firstname": "First Name",
+  "widget.lastname": "Last Name",
+  "widget.contactnumber": "Contact Number",
+  "widget.email": "Email Address",
+  "widget.location": "Your location",
+  "widget.service": "What services are you interested in?",
+  "widget.describe": "Please describe what you specifically need from a doctor's office and what health insurance you have. Avoid sharing any sensitive information.",
+  "widget.submit": "SUBMIT"
+}

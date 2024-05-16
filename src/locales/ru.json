@@ -1,0 +1,62 @@
+{
+  "navbar.home": "Главная",
+  "navbar.why": "Путь пациента",
+  "navbar.services": "О нас",
+  "navbar.contact": "Свяжитесь с нами",
+
+  "hero.title": "Получите быструю медицинскую помощь с",
+  "hero.text": "Скажите 'прощай' долгим и тревожным ожиданиям медицинских приемов.",
+  "hero.text2": "Выбрав Gomed, вы получите консультацию у врача в течение максимум трёх дней. Быстрое и эффективное медицинское обслуживание - вот наша главная задача.",
+
+  "ctaform.title": "Ограниченное предложение: 70% скидка на первый визит!",
+  "ctaform.email": "Электронная почта",
+  "ctaform.phone": "Номер телефона",
+  "ctaform.insurance": "Медицинская страховка",
+  "ctaform.specialist": "Выберите специалистов",
+  "ctaform.submit": "Присоединиться к списку ожидания",
+  "ctaform.privacy": "Я прочитал и согласен с ",
+  "ctaform.privacy2": "политикой конфиденциальности",
+
+  "why.title": "Почему стоит выбрать Gomed?",
+  "why.subtitle": "Скорая помощь на расстоянии вытянутой руки:",
+  "why.subtitle2": "Быстрая, надежная, персонализированная",
+  "why.reason1": "Быстрая медицинская помощь",
+  "why.reason1text": "Gomed ценит ваше время. Получите необходимую медицинскую помощь быстро. Больше нет необходимости ждать пока вам окажут срочную помощь.",
+  "why.reason2": "Гибкие варианты",
+  "why.reason2text": "Выберите свой медицинский план, как поездку. 'Эконом' для записи на прием в течение 48 часов, 'Премиум' для консультации в тот же день. Ваше здоровье, ваш выбор.",
+  "why.reason3": "Доверенные профессионалы",
+  "why.reason3text": "Наша сеть - ваше преимущество. Только лучшие врачи, готовые к быстрым встречам. Каждый визит обещает качественное обслуживание.",
+
+  "revolution.title": "#РЕВОЛЮЦИЯВЗДРАВООХРАНЕНИИ",
+  "revolution.subtitle": "Gomed. Ваше здоровье ускорено.",
+  "revolution.text": "Вступите в новую главу здравоохранения. Присоединяйтесь к нашему списку ожидания уже сегодня и будьте среди первых, кто оценит сервис, который ценит ваше здоровье так же, как и ваше время.",
+
+  "join.title": "Готовы отдать приоритет вашему здоровью и времени?",
+  "join.subtitle": "Присоединяйтесь к нашему списку ожидания сейчас",
+
+  "contact.title": "Есть вопросы? Свяжитесь с нами!",
+  "contact.subtitle": "Свяжитесь с нами напрямую по адресу ",
+
+  "footer.privacyPolicy": "Политика конфиденциальности",
+  "footer.stickers": "Наклейки разработаны kerismaker из Flaticon",
+  "footer.language": "Язык",
+
+  "validation.email.required": "Требуется электронная почта",
+  "validation.email.invalid": "Пожалуйста, введите действительный адрес электронной почты",
+
+  "validation.phone.required": "Требуется номер телефона",
+  "validation.phone.invalid": "Номер телефона должен содержать 9 цифр",
+
+  "validation.insurance.required": "Пожалуйста, выберите свою медицинскую страховку",
+
+  "validation.specialist.required": "Пожалуйста, выберите специалистов",
+
+  "widget.firstname": "First Name",
+  "widget.lastname": "Last Name",
+  "widget.contactnumber": "Contact Number",
+  "widget.email": "Электронная почта",
+  "widget.location": "Your location",
+  "widget.service": "What services are you interested in?",
+  "widget.describe": "Please describe what you specifically need from a doctor's office and what health insurance you have. Avoid sharing any sensitive information.",
+  "widget.submit": "ОТПРАВИТЬ"
+}

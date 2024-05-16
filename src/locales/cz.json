@@ -1,0 +1,63 @@
+{
+  "navbar.home": "Domů",
+  "navbar.why": "Pacientova cesta",
+  "navbar.services": "O nás",
+  "navbar.contact": "Kontaktujte nás",
+
+  "hero.title": "Zažijte rychlou zdravotní péči s",
+  "hero.text": "Rozlučte se s dlouhým čekáním plným úzkosti na lékařské schůzky.",
+  "hero.text2": "S Gomed se dostanete k lékaři maximálně do tří dnů. Rychlá a efektivní zdravotní péče – to je naše doména.",
+
+  "ctaform.title": "Limitovaná nabídka: 70% sleva na vaši první návštěvu!",
+  "ctaform.email": "E-mailová adresa",
+  "ctaform.phone": "Telefonní číslo",
+  "ctaform.insurance": "Vaše zdravotní pojištění",
+  "ctaform.specialist": "Které potřebujete specialisty?",
+  "ctaform.submit": "Přidejte se na seznam čekatelů",
+  "ctaform.privacy": "Přečetl jsem si ",
+  "ctaform.privacy2": "zásady ochrany osobních údajů",
+  "ctaform.privacyCZ": " a souhlasím s nimi",
+
+  "why.title": "Proč si vybrat Gomed?",
+  "why.subtitle": "Akutní péče na dosah ruky:",
+  "why.subtitle2": "Rychlá, spolehlivá, personalizovaná",
+  "why.reason1": "Rychlá zdravotní péče",
+  "why.reason1text": "Gomed si váží vašeho času. Získejte rychlou zdravotní péči, kterou potřebujete. Žádné další čekání na akutní péči.",
+  "why.reason2": "Flexibilní možnosti",
+  "why.reason2text": "Vyberte si svůj zdravotní plán jako jízdu. 'Ekonomický' pro schůzku do 48 hodin, 'Premium' pro konzultaci ve stejný den. Vaše zdraví, vaše cesta.",
+  "why.reason3": "Důvěryhodní profesionálové",
+  "why.reason3text": "Naše síť je vaší výhodou. Jen ti nejlepší lékaři, připraveni na rychlé schůzky. Každá návštěva slibuje kvalitní péči.",
+
+  "revolution.title": "#REVOLUCEVEZDRAVOTNÍPÉČE",
+  "revolution.subtitle": "Gomed. Vaše zdraví, urychleno.",
+  "revolution.text": "Vstupte do nové kapitoly zdravotní péče. Připojte se k našemu seznamu čekatelů již dnes a buďte mezi prvními, kdo využije službu, která si váží vašeho zdraví stejně jako vašeho času.",
+
+  "join.title": "Jste připraveni dát přednost svému zdraví a času?",
+  "join.subtitle": "Připojte se nyní k naší čekací listině",
+
+  "contact.title": "Máte nějaké otázky? Kontaktujte nás!",
+  "contact.subtitle": "Kontaktujte nás přímo na ",
+
+  "footer.privacyPolicy": "Zásady ochrany osobních údajů",
+  "footer.stickers": "Samolepky navrhl kerismaker z Flaticon",
+  "footer.language": "Jazyk",
+
+  "validation.email.required": "E-mail je povinný",
+  "validation.email.invalid": "Prosím zadejte platnou e-mailovou adresu",
+
+  "validation.phone.required": "Telefonní číslo je povinné",
+  "validation.phone.invalid": "Telefonní číslo by mělo mít 9 číslic",
+
+  "validation.insurance.required": "Prosím vyberte svoje pojištění",
+
+  "validation.specialist.required": "Prosím vyberte specialisty",
+
+  "widget.firstname": "First Name",
+  "widget.lastname": "Last Name",
+  "widget.contactnumber": "Contact Number",
+  "widget.email": "E-mailová adresa",
+  "widget.location": "Your location",
+  "widget.service": "What services are you interested in?",
+  "widget.describe": "Please describe what you specifically need from a doctor's office and what health insurance you have. Avoid sharing any sensitive information.",
+  "widget.submit": "SUBMIT"
+}
