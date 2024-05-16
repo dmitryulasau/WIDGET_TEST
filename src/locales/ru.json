@@ -51,12 +51,15 @@
 
   "validation.specialist.required": "Пожалуйста, выберите специалистов",
 
-  "widget.firstname": "First Name",
-  "widget.lastname": "Last Name",
-  "widget.contactnumber": "Contact Number",
-  "widget.email": "Электронная почта",
-  "widget.location": "Your location",
-  "widget.service": "What services are you interested in?",
-  "widget.describe": "Please describe what you specifically need from a doctor's office and what health insurance you have. Avoid sharing any sensitive information.",
-  "widget.submit": "ОТПРАВИТЬ"
+  "widget.heading": "Форма запроса на запись",
+  "widget.subheading": "Сообщите нам, как мы можем вам помочь!",
+  "widget.firstname": "Имя",
+  "widget.lastname": "Фамилия",
+  "widget.contactnumber": "Контактный номер",
+  "widget.email": "Электронный адрес",
+  "widget.location": "Ваше местоположение",
+  "widget.service": "Какие услуги вас интересуют?",
+  "widget.describe": "Пожалуйста, уточните, что именно вам нужно от врачебного кабинета.",
+  "widget.submit": "ОТПРАВИТЬ",
+  "widget.thankyou": "Спасибо за ваш запрос!"
 }

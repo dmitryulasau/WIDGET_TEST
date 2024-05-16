@@ -53,6 +53,8 @@
 
   "ctaform.privacyError": "Please agree to the privacy policy",
 
+  "widget.heading": "Appointment Request Form",
+  "widget.subheading": "Let us know how we can help you!",
   "widget.firstname": "First Name",
   "widget.lastname": "Last Name",
   "widget.contactnumber": "Contact Number",

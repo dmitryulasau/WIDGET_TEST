@@ -18,7 +18,10 @@ import LanguageContext from "../contexts/LanguageContext"; // Import Language Co
 import enTranslations from "../locales/en.json";
 import czTranslations from "../locales/cz.json";
 import ruTranslations from "../locales/ru.json";
-import {elementScrollIntoView, elementScrollIntoViewPolyfill} from "seamless-scroll-polyfill";
+import {
+  elementScrollIntoView,
+  elementScrollIntoViewPolyfill,
+} from "seamless-scroll-polyfill";
 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -78,9 +81,9 @@ function ResponsiveAppBar() {
       ) {
         // Safari does not support scrollIntoView, thus using a third-party API
         elementScrollIntoView(element, {
-          behavior: 'smooth',
-          block: 'start',
-          inline: 'nearest'
+          behavior: "smooth",
+          block: "start",
+          inline: "nearest",
         });
       } else {
         // For other devices or if scrollIntoViewIfNeeded is not available, use regular scrollIntoView with smooth behavior
@@ -162,7 +165,7 @@ function ResponsiveAppBar() {
           background: "var(--white)",
           // background: "lightyellow",
           width: "100%",
-          zIndex: 1000,
+          zIndex: 900,
           position: "sticky",
         }}
       >

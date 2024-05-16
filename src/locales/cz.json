@@ -52,12 +52,15 @@
 
   "validation.specialist.required": "Prosím vyberte specialisty",
 
-  "widget.firstname": "First Name",
-  "widget.lastname": "Last Name",
-  "widget.contactnumber": "Contact Number",
-  "widget.email": "E-mailová adresa",
-  "widget.location": "Your location",
-  "widget.service": "What services are you interested in?",
-  "widget.describe": "Please describe what you specifically need from a doctor's office and what health insurance you have. Avoid sharing any sensitive information.",
-  "widget.submit": "SUBMIT"
+  "widget.heading": "Žádost",
+  "widget.subheading": "Dejte nám vědět, jak vám můžeme pomoci!",
+  "widget.firstname": "Jméno",
+  "widget.lastname": "Příjmení",
+  "widget.contactnumber": "Kontaktní číslo",
+  "widget.email": "Emailová adresa",
+  "widget.location": "Vaše poloha",
+  "widget.service": "Jaké služby vás zajímají?",
+  "widget.describe": "Uveďte, prosím, co konkrétně hledáte u lékaře a jaké máte zdravotní pojištění. Nevkládejte žádné citlivé údaje.",
+  "widget.submit": "ODESLAT",
+  "widget.thankyou": "Děkujeme za vaši žádost!"
 }

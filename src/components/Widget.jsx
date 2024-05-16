@@ -85,6 +85,8 @@ function Widget() {
   };
 
   const inputstyle = {
+    marginTop: "0.8rem",
+    marginBottom: "0rem",
     "& .MuiFilledInput-root": {
       fontFamily: "Montserrat",
       color: "#000",
@@ -188,7 +190,7 @@ function Widget() {
                   bottom: 80,
                   right: 16,
                   backgroundColor: "#fff",
-                  padding: 4,
+                  padding: "2rem",
                   borderRadius: 4,
                   boxShadow: 3,
                   zIndex: 999,
@@ -197,13 +199,14 @@ function Widget() {
                 <Box
                   sx={{
                     textAlign: "center",
-                    fontSize: "1.6rem",
+                    fontSize: "1.3rem",
                     letterSpacing: "0.02em",
+                    marginBottom: "0.8rem",
                   }}
                 >
-                  <h3>Appointment Request Form</h3>
+                  <h3>{translations["widget.heading"]}</h3>
                   <br />
-                  Let us know how we can help you!
+                  {translations["widget.subheading"]}
                 </Box>
                 <Grid container spacing={2}>
                   <Grid item xs={6}>
@@ -325,9 +328,14 @@ function Widget() {
 
                 <Box
                   sx={{
-                    fontSize: "1.2rem",
+                    fontSize: "1.1rem",
                     letterSpacing: "0.02em",
+                    marginTop: "1rem",
                     marginBottom: "1rem",
+                    paddingLeft: "1rem",
+                    paddingRight: "1rem",
+                    textAlign: "left",
+                    lineHeight: 1.1,
                   }}
                 >
                   {/* DESCRIBE */}
@@ -382,7 +390,7 @@ function Widget() {
             zIndex: 999,
           }}
         >
-          <p>Thank you for your request!</p>
+          <p>{translations["widget.submit"]}</p>
         </Box>
       )}
     </div>
