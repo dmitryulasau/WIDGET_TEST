@@ -193,7 +193,7 @@ function Widget() {
               setFormVisible(false);
               resetForm();
               setSubmitted(false);
-            }, 3000);
+            }, 4000);
           }}
         >
           {({ isSubmitting }) => (
@@ -411,17 +411,24 @@ function Widget() {
             right: 16,
             backgroundColor: "#fff",
             textAlign: "center",
-            padding: 4,
+            padding: 2,
             borderRadius: 4,
             boxShadow: 3,
-            fontSize: "2rem",
+            fontSize: "1.8rem",
             fontWeight: "800",
             color: "#53d769",
-            width: { xs: "92vw", sm: "350px" },
+            width: {
+              xs: "92vw",
+              sm: "50vw",
+              md: "40vw",
+              lg: "30vw",
+              xl: "20vw",
+            },
             zIndex: 999,
           }}
         >
           <p>{translations["widget.thankyou"]}</p>
+          <p>{translations["widget.thankyou2"]}</p>
         </Box>
       )}
     </div>

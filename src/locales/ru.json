@@ -62,6 +62,7 @@
   "widget.describe": "Пожалуйста, уточните, что именно вам нужно от врачебного кабинета.",
   "widget.submit": "ОТПРАВИТЬ",
   "widget.thankyou": "Спасибо за ваш запрос!",
+  "widget.thankyou2": "Мы скоро свяжемся с вами",
 
   "widget.error.firstname": "Требуется имя",
   "widget.error.lastname": "Требуется фамилия",

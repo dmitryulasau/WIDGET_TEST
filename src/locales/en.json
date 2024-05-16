@@ -64,6 +64,7 @@
   "widget.describe": "Please describe what you specifically need from a doctor's office and what health insurance you have. Avoid sharing any sensitive information.",
   "widget.submit": "SUBMIT",
   "widget.thankyou": "Thank you for your request!",
+  "widget.thankyou2": "We will contact you soon",
 
   "widget.error.firstname": "First name is required",
   "widget.error.lastname": "Last name is required",
