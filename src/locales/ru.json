@@ -61,5 +61,15 @@
   "widget.service": "Какие услуги вас интересуют?",
   "widget.describe": "Пожалуйста, уточните, что именно вам нужно от врачебного кабинета.",
   "widget.submit": "ОТПРАВИТЬ",
-  "widget.thankyou": "Спасибо за ваш запрос!"
+  "widget.thankyou": "Спасибо за ваш запрос!",
+
+  "widget.error.firstname": "Требуется имя",
+  "widget.error.lastname": "Требуется фамилия",
+  "widget.error.phonedigits": "Должны быть только цифры",
+  "widget.error.phoneshort": "Номер слишком короткий",
+  "widget.error.phonerequired": "Требуется номер телефона",
+  "widget.error.invalidemail": "Неверный адрес электронной почты",
+  "widget.error.emailrequired": "Требуется электронная почта",
+  "widget.error.location": "Укажите местоположение",
+  "widget.error.service": "Пожалуйста, заполните это поле"
 }

@@ -62,5 +62,15 @@
   "widget.service": "Jaké služby vás zajímají?",
   "widget.describe": "Uveďte, prosím, co konkrétně hledáte u lékaře a jaké máte zdravotní pojištění. Nevkládejte žádné citlivé údaje.",
   "widget.submit": "ODESLAT",
-  "widget.thankyou": "Děkujeme za vaši žádost!"
+  "widget.thankyou": "Děkujeme za vaši žádost!",
+
+  "widget.error.firstname": "Jméno je povinné",
+  "widget.error.lastname": "Příjmení je povinné",
+  "widget.error.phonedigits": "Musí být pouze číslice",
+  "widget.error.phoneshort": "Číslo je příliš krátké",
+  "widget.error.phonerequired": "Telefonní číslo je povinné",
+  "widget.error.invalidemail": "Neplatný email",
+  "widget.error.emailrequired": "Email je povinný",
+  "widget.error.location": "Místo je povinné",
+  "widget.error.service": "Vyplňte prosím toto pole"
 }

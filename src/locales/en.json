@@ -62,5 +62,16 @@
   "widget.location": "Your location",
   "widget.service": "What services are you interested in?",
   "widget.describe": "Please describe what you specifically need from a doctor's office and what health insurance you have. Avoid sharing any sensitive information.",
-  "widget.submit": "SUBMIT"
+  "widget.submit": "SUBMIT",
+  "widget.thankyou": "Thank you for your request!",
+
+  "widget.error.firstname": "First name is required",
+  "widget.error.lastname": "Last name is required",
+  "widget.error.phonedigits": "Must be only digits",
+  "widget.error.phoneshort": "Number is too short",
+  "widget.error.phonerequired": "Phone number is required",
+  "widget.error.invalidemail": "Invalid email",
+  "widget.error.emailrequired": "Email is required",
+  "widget.error.location": "Location is required",
+  "widget.error.service": "Please fill in this field"
 }

@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+
 import Fab from "@mui/material/Fab";
 import PhoneIphoneIcon from "@mui/icons-material/PhoneIphone";
 import CloseIcon from "@mui/icons-material/Close";
@@ -23,6 +24,15 @@ import { useContext } from "react";
 import { useRef } from "react";
 
 function Widget() {
+  // LANGUAGES
+  const { language, setLanguage } = useContext(LanguageContext); // Access Language Context
+  const translations =
+    language === "cz"
+      ? czTranslations
+      : language === "ru"
+      ? ruTranslations
+      : enTranslations;
+
   const form = useRef(null);
 
   const serviceId = import.meta.env.VITE_SERVICE_ID;
@@ -50,24 +60,18 @@ function Widget() {
 
   // VALIDATION SCHEMA
   const validationSchema = Yup.object().shape({
-    firstname: Yup.string().required("First name is required"),
-    lastname: Yup.string().required("Last name is required"),
-    email: Yup.string().email("Invalid email").required("Email is required"),
-    location: Yup.string().required("Location is required"),
+    firstname: Yup.string().required(translations["widget.error.firstname"]),
+    lastname: Yup.string().required(translations["widget.error.lastname"]),
+    email: Yup.string()
+      .email(translations["widget.error.invalidemail"])
+      .required(translations["widget.error.emailrequired"]),
+    location: Yup.string().required(translations["widget.error.location"]),
     phonenumber: Yup.string()
-      .matches(/^[0-9]+$/, "Must be only digits")
-      .min(7, "Too short")
-      .required("Phone number is required"),
+      .matches(/^[0-9]+$/, translations["widget.error.phonedigits"])
+      .min(7, translations["widget.error.phoneshort"])
+      .required(translations["widget.error.phonerequired"]),
+    services: Yup.string().required(translations["widget.error.service"]),
   });
-
-  // LANGUAGES
-  const { language, setLanguage } = useContext(LanguageContext); // Access Language Context
-  const translations =
-    language === "cz"
-      ? czTranslations
-      : language === "ru"
-      ? ruTranslations
-      : enTranslations;
 
   const [formVisible, setFormVisible] = useState(false);
   const [formData, setFormData] = useState({
@@ -131,6 +135,17 @@ function Widget() {
     },
   };
 
+  useEffect(() => {
+    setFormData({
+      firstname: "",
+      lastname: "",
+      phonenumber: "",
+      email: "",
+      location: "",
+      services: "",
+    });
+  }, [language]);
+
   return (
     <div>
       <Fab
@@ -156,6 +171,7 @@ function Widget() {
 
       {formVisible && !submitted && (
         <Formik
+          key={language}
           initialValues={{
             firstname: "",
             lastname: "",
@@ -323,6 +339,11 @@ function Widget() {
                   multiline
                   rows={3}
                   margin="normal"
+                  helperText={
+                    <div style={{ color: "var(--error-color)" }}>
+                      <ErrorMessage name="services" component="div" />
+                    </div>
+                  }
                 />
                 {/* SERVICES END */}
 
@@ -390,7 +411,7 @@ function Widget() {
             zIndex: 999,
           }}
         >
-          <p>{translations["widget.submit"]}</p>
+          <p>{translations["widget.thankyou"]}</p>
         </Box>
       )}
     </div>
