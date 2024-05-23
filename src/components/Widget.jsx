@@ -60,8 +60,7 @@ function Widget() {
 
   // VALIDATION SCHEMA
   const validationSchema = Yup.object().shape({
-    firstname: Yup.string().required(translations["widget.error.firstname"]),
-    lastname: Yup.string().required(translations["widget.error.lastname"]),
+    insurance: Yup.string().required(translations["widget.error.insurance"]),
     email: Yup.string()
       .email(translations["widget.error.invalidemail"])
       .required(translations["widget.error.emailrequired"]),
@@ -75,10 +74,9 @@ function Widget() {
 
   const [formVisible, setFormVisible] = useState(false);
   const [formData, setFormData] = useState({
-    firstname: "",
-    lastname: "",
-    phonenumber: "",
     email: "",
+    phonenumber: "",
+    insurance: "",
     location: "",
     services: "",
   });
@@ -96,7 +94,7 @@ function Widget() {
       color: "#000",
       fontSize: "1.4rem",
       overflow: "hidden",
-      borderRadius: 4,
+      borderRadius: "1.2rem",
       backgroundColor: "var(--white)",
       border: "1px solid",
       borderColor: "var(--secondary-color)",
@@ -112,7 +110,8 @@ function Widget() {
 
     "& .MuiFormHelperText-root": {
       color: "var(--error-color)",
-      fontSize: "1rem",
+      fontSize: "1.1rem",
+      fontWeight: "600",
     },
     "& .MuiInputLabel-root": {
       fontFamily: "Montserrat",
@@ -123,24 +122,22 @@ function Widget() {
       },
     },
     "& .MuiFormHelperText-root.Mui-error": {
-      // Override error text color
       color: "var(--error-color)",
     },
     "& .MuiInputLabel-root.Mui-error": {
       color: "#656565",
     },
     "& .MuiFilledInput-root.Mui-error": {
-      borderColor: "var(--error-color)",
+      borderColor: "green",
       boxShadow: `var(--error-color) 0 0 0 2px`,
     },
   };
 
   useEffect(() => {
     setFormData({
-      firstname: "",
-      lastname: "",
-      phonenumber: "",
       email: "",
+      phonenumber: "",
+      insurance: "",
       location: "",
       services: "",
     });
@@ -173,18 +170,15 @@ function Widget() {
         <Formik
           key={language}
           initialValues={{
-            firstname: "",
-            lastname: "",
-            phonenumber: "",
             email: "",
+            phonenumber: "",
+            insurance: "",
             location: "",
             services: "",
           }}
           validationSchema={validationSchema}
           onSubmit={(values, { setSubmitting, resetForm, ...other }) => {
-            // Pass the event object as the third argument
             sendEmail(values, other);
-            // Here you can handle form submission logic
             setSubmitting(false);
             // Display thank you message
             setSubmitted(true);
@@ -211,7 +205,7 @@ function Widget() {
 
                   bottom: 80,
                   right: 16,
-                  backgroundColor: "#fff",
+                  backgroundColor: "var(--blue)",
                   padding: "2rem",
                   borderRadius: 4,
                   boxShadow:
@@ -224,19 +218,23 @@ function Widget() {
               >
                 <Box
                   sx={{
+                    fontFamily: "Montserrat",
                     textAlign: "center",
-                    fontSize: "1.3rem",
-                    letterSpacing: "0.02em",
+                    fontWeight: "800",
+                    color: "#fff",
+                    lineHeight: "1.1",
+                    fontSize: "1.8rem",
+                    letterSpacing: "5%",
                     marginBottom: "0.8rem",
                   }}
                 >
-                  <h3>{translations["widget.heading"]}</h3>
+                  {translations["widget.heading"]}
                   <br />
                   {translations["widget.subheading"]}
                 </Box>
-                <Grid container spacing={2}>
+                {/* <Grid container spacing={2}>
                   <Grid item xs={6}>
-                    {/* FIRST NAME */}
+                  
                     <Field
                       InputProps={{ disableUnderline: true }}
                       sx={inputstyle}
@@ -253,7 +251,7 @@ function Widget() {
                         </div>
                       }
                     />
-                    {/* FIRST NAME END */}
+              
                   </Grid>
                   <Grid item xs={6}>
                     <Field
@@ -273,7 +271,26 @@ function Widget() {
                       }
                     />
                   </Grid>
-                </Grid>
+                </Grid> */}
+
+                {/* EMAIL */}
+                <Field
+                  InputProps={{ disableUnderline: true }}
+                  sx={inputstyle}
+                  variant="filled"
+                  name="email"
+                  type="email"
+                  label={translations["widget.email"]}
+                  as={TextField}
+                  fullWidth
+                  margin="normal"
+                  helperText={
+                    <div style={{ color: "var(--error-color)" }}>
+                      <ErrorMessage name="email" component="div" />
+                    </div>
+                  }
+                />
+                {/* EMAIL END */}
 
                 {/* PHONE NUMBER */}
                 <Field
@@ -298,24 +315,24 @@ function Widget() {
                 />
                 {/* PHONE NUMBER END */}
 
-                {/* EMAIL */}
+                {/* INSURANCE */}
                 <Field
                   InputProps={{ disableUnderline: true }}
                   sx={inputstyle}
                   variant="filled"
-                  name="email"
-                  type="email"
-                  label={translations["widget.email"]}
+                  name="insurance"
+                  type="text"
+                  label={translations["widget.insurance"]}
                   as={TextField}
                   fullWidth
                   margin="normal"
                   helperText={
                     <div style={{ color: "var(--error-color)" }}>
-                      <ErrorMessage name="email" component="div" />
+                      <ErrorMessage name="insurance" component="div" />
                     </div>
                   }
                 />
-                {/* EMAIL END */}
+                {/* INSURANCE END */}
 
                 {/* LOCATION */}
                 <Field
@@ -357,7 +374,7 @@ function Widget() {
                 />
                 {/* SERVICES END */}
 
-                <Box
+                {/* <Box
                   sx={{
                     fontSize: "1.1rem",
                     letterSpacing: "0.02em",
@@ -369,21 +386,22 @@ function Widget() {
                     lineHeight: 1.1,
                   }}
                 >
-                  {/* DESCRIBE */}
+             
                   {translations["widget.describe"]}
-                </Box>
+                </Box> */}
                 <Button
                   sx={{
                     mt: 2,
                     fontFamily: "Montserrat",
                     color: "var(--white)",
-                    fontSize: "1.6rem",
-                    fontWeight: "bold",
+                    fontSize: "2.4rem",
+                    fontWeight: "800",
+                    fontStyle: "italic",
                     textTransform: "none",
                     borderRadius: "1.2rem",
-                    padding: "0.3rem 4rem",
+                    padding: "1rem 2rem",
 
-                    background: "#53d769",
+                    background: "var(--secondary-color)",
                     "&:hover": {
                       background: "#9dd9f4",
                       color: "var(--primary-color)",
