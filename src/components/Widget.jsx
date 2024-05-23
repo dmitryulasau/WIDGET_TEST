@@ -230,6 +230,7 @@ function Widget() {
                 >
                   {translations["widget.heading"]}
                   <br />
+                  <br />
                   {translations["widget.subheading"]}
                 </Box>
                 {/* <Grid container spacing={2}>
