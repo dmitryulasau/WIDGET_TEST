@@ -228,9 +228,8 @@ function Widget() {
                     marginBottom: "0.8rem",
                   }}
                 >
-                  {translations["widget.heading"]}
-                  <br />
-                  <br />
+                  <Box sx={{ mb: 1 }}>{translations["widget.heading"]}</Box>
+
                   {translations["widget.subheading"]}
                 </Box>
                 {/* <Grid container spacing={2}>
@@ -365,7 +364,7 @@ function Widget() {
                   as={TextField}
                   fullWidth
                   multiline
-                  rows={3}
+                  rows={2}
                   margin="normal"
                   helperText={
                     <div style={{ color: "var(--error-color)" }}>
