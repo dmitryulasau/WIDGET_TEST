@@ -23,7 +23,51 @@ import { useContext } from "react";
 
 import { useRef } from "react";
 
+import axios from "axios";
+import CryptoJS from "crypto-js";
+
+import MenuItem from "@mui/material/MenuItem";
+
+const secretKey = import.meta.env.VITE_SECRET_KEY;
+const decodedKey = CryptoJS.enc.Base64.parse(secretKey);
+const hashedKey = CryptoJS.SHA256(decodedKey);
+
+const encrypted = CryptoJS.AES.encrypt("a", hashedKey, {
+  mode: CryptoJS.mode.ECB,
+  padding: CryptoJS.pad.Pkcs7,
+});
+
+const otherTranslations = {
+  en: "Other",
+  ru: "Другая",
+  cz: "Další",
+};
+
 function Widget() {
+  // GET INSURANCE
+  const [insuranceProviders, setInsuranceProviders] = useState([]);
+
+  useEffect(() => {
+    const insuranceEndpoint =
+      "https://gomed-crud-backend-0230dd55a01f.herokuapp.com/static-data/insurance_providers";
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${encrypted}`,
+        "Content-Type": "application/json",
+      },
+    };
+
+    axios
+      .get(insuranceEndpoint, config)
+      .then((response) => {
+        setInsuranceProviders(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching insurance providers:", error);
+      });
+  }, []);
+
   // LANGUAGES
   const { language, setLanguage } = useContext(LanguageContext); // Access Language Context
   const translations =
@@ -331,7 +375,26 @@ function Widget() {
                       <ErrorMessage name="insurance" component="div" />
                     </div>
                   }
-                />
+                  select
+                >
+                  {[...insuranceProviders, "Other"].map(
+                    (insuranceProvider, index) => (
+                      <MenuItem
+                        sx={{
+                          fontFamily: "Montserrat",
+                          letterSpacing: "0.1em",
+                          color: "#787878",
+                        }}
+                        key={index}
+                        value={insuranceProvider}
+                      >
+                        {insuranceProvider === "Other"
+                          ? otherTranslations[language]
+                          : insuranceProvider}
+                      </MenuItem>
+                    )
+                  )}
+                </Field>
                 {/* INSURANCE END */}
 
                 {/* LOCATION */}
@@ -394,9 +457,9 @@ function Widget() {
                     mt: 2,
                     fontFamily: "Montserrat",
                     color: "var(--white)",
-                    fontSize: "2.4rem",
+                    fontSize: "1.8rem",
                     fontWeight: "800",
-                    fontStyle: "italic",
+
                     textTransform: "none",
                     borderRadius: "1.2rem",
                     padding: "1rem 2rem",
