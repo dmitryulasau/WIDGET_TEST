@@ -51,17 +51,17 @@
 
   "validation.specialist.required": "Пожалуйста, выберите специалистов",
 
-  "widget.heading": "Нужен врач как можно скорее?",
-  "widget.subheading": "Отправьте запрос прямо сейчас — быстрый ответ гарантирован!",
+  "widget.heading": "Нужен врач немедленно?",
+  "widget.subheading": "Отправьте ваш запрос, и мы ответим мгновенно!",
   "widget.firstname": "Имя",
   "widget.lastname": "Фамилия",
-  "widget.contactnumber": "Номер телефона",
+  "widget.contactnumber": "Телефонный номер",
   "widget.email": "Электронный адрес",
   "widget.insurance": "Ваша медицинская страховка",
-  "widget.location": "Ваше местоположение",
-  "widget.service": "Опишите вашу проблему со здоровьем",
+  "widget.location": "Ваше местонахождение",
+  "widget.service": "Опишите вашу медицинскую проблему",
   "widget.describe": "Пожалуйста, уточните, что именно вам нужно от врачебного кабинета.",
-  "widget.submit": "ПОСЛАТЬ ЗАПРОС",
+  "widget.submit": "ОТПРАВИТЬ ЗАПРОС",
   "widget.thankyou": "Спасибо за ваш запрос!",
   "widget.thankyou2": "Мы скоро свяжемся с вами",
 

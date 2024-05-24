@@ -52,17 +52,17 @@
 
   "validation.specialist.required": "Prosím vyberte specialisty",
 
-  "widget.heading": "Potřebujete co nejdříve lékaře?",
-  "widget.subheading": "Odešlete svůj požadavek nyní – rychlá odpověď zaručena!",
+  "widget.heading": "Potřebujete rychle lékaře?",
+  "widget.subheading": "Zašlete nám žádost a zaručujeme okamžitou odpověď!",
   "widget.firstname": "Jméno",
   "widget.lastname": "Příjmení",
-  "widget.contactnumber": "Telefonní číslo",
+  "widget.contactnumber": "Číslo telefonu",
   "widget.email": "Emailová adresa",
   "widget.insurance": "Vaše zdravotní pojištění",
-  "widget.location": "Vaše poloha",
-  "widget.service": "Popište svůj zdravotní problém",
+  "widget.location": "Vaše lokace",
+  "widget.service": "Popište váš zdravotní stav",
   "widget.describe": "Uveďte, prosím, co konkrétně hledáte u lékaře a jaké máte zdravotní pojištění. Nevkládejte žádné citlivé údaje.",
-  "widget.submit": "POSLAT ŽÁDOST",
+  "widget.submit": "ODESLAT POŽADAVEK",
   "widget.thankyou": "Děkujeme za vaši žádost!",
   "widget.thankyou2": "Brzy vás budeme kontaktovat",
 
