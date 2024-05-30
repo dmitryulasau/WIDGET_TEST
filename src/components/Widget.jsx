@@ -80,21 +80,89 @@ function Widget() {
   const form = useRef(null);
 
   const serviceId = import.meta.env.VITE_SERVICE_ID;
+  //TODO
   const appointmentTemplateId = import.meta.env.VITE_APPOINTMENT_TEMPLATE_ID;
   const userId = import.meta.env.VITE_USER_ID;
+  const personalEmailTemplateId = "template_ces3y3j"; //TODO
+
+  // EMAIL
+
+  const [subject, setSubject] = useState("");
+  const [message, setMessage] = useState("");
+
+  useEffect(() => {
+    // Populate subject and message based on selected language
+    switch (language) {
+      case "cz":
+        setSubject("Potvrzení vaší žádosti k Gomed");
+        setMessage(
+          `Zdravíme Vás!\n\nDěkujeme, že jste se obrátili na Gomed! \nVaši žádost jsme přijali a aktuálně pro vás vyhledáváme nejlepší možnou variantu. \nOzveme se vám co nejdříve e-mailem.\n\nS pozdravem,\nTým Gomed`
+        );
+        break;
+      case "ru":
+        setSubject("Подтверждение вашего запроса в Gomed");
+        setMessage(
+          `Приветствуем вас!\n\nБлагодарим вас за обращение в Gomed! \nМы получили ваш запрос и сейчас подбираем для вас наилучший вариант. \nМы свяжемся с вами по электронной почте в ближайшее время.\n\nС наилучшими пожеланиями,\nКоманда Gomed`
+        );
+        break;
+      default:
+        setSubject("Confirmation of Your Request to Gomed");
+        setMessage(
+          `Greetings!\n\nThank you for reaching out to us! \nWe have received your request and are currently reviewing it. \nWe are searching for the soonest and best option to meet your needs. We will get back to you via email as soon as possible.\n\nBest regards,\nGomed Team`
+        );
+    }
+  }, [language]);
 
   const sendEmail = (formData) => {
     console.log(formData);
+
+    const personalEmail = import.meta.env.VITE_PERSONALEMAIL;
+
     if (form.current) {
+      console.log(form.current);
+
+      // Send the client email along with the form data and emailDataClient
       emailjs
         .sendForm(serviceId, appointmentTemplateId, form.current, userId)
         .then(
           (result) => {
-            console.log("Email successfully sent!", result.text);
+            console.log("Client email successfully sent!", result.text);
             setSubmitted(true);
+
+            const personalEmailData = {
+              to_email: personalEmail,
+              email: formData.email,
+              phonenumber: formData.phonenumber,
+              insurance: formData.insurance,
+              location: formData.location,
+              services: formData.services,
+            };
+
+            // Send the personal email
+            emailjs
+              .send(
+                serviceId,
+                personalEmailTemplateId,
+                personalEmailData,
+                userId
+              )
+              .then(
+                (personalResult) => {
+                  console.log(
+                    "Personal email successfully sent!",
+                    personalResult.text
+                  );
+                },
+                (personalError) => {
+                  console.error(
+                    "Personal email sending failed:",
+                    personalError.text
+                  );
+                }
+              );
           },
           (error) => {
-            console.error("Email sending failed:", error.text);
+            console.error("Client email sending failed:", error.text);
           }
         );
     } else {
@@ -436,6 +504,9 @@ function Widget() {
                   }
                 />
                 {/* SERVICES END */}
+
+                <Field type="hidden" name="subject" value={subject} />
+                <Field type="hidden" name="message" value={message} />
 
                 {/* <Box
                   sx={{
