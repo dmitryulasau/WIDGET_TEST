@@ -83,7 +83,7 @@ function Widget() {
   //TODO
   const appointmentTemplateId = import.meta.env.VITE_APPOINTMENT_TEMPLATE_ID;
   const userId = import.meta.env.VITE_USER_ID;
-  const personalEmailTemplateId = "template_ces3y3j"; //TODO
+  const personalEmailTemplateId = import.meta.env.VITE_CLIENT_INFO_TEMPLATE_ID; //TODO
 
   // EMAIL
 
