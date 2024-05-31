@@ -102,13 +102,13 @@ function Widget() {
       case "ru":
         setSubject("Подтверждение вашего запроса в Gomed");
         setMessage(
-          `Приветствуем вас!\n\nБлагодарим вас за обращение в Gomed! \nМы получили ваш запрос и свяжемся с вами по электронной почте в ближайшее время.\n\nС наилучшими пожеланиями,\nКоманда Gomed`
+          `Приветствуем Вас!\n\nБлагодарим Вас за обращение в Gomed! \nМы получили Ваш запрос и свяжемся с Вами по электронной почте в ближайшее время.\n\nС наилучшими пожеланиями,\nКоманда Gomed`
         );
         break;
       default:
         setSubject("Confirmation of Your Request to Gomed");
         setMessage(
-          `Greetings!\n\nThank you for reaching out to us! \nWe have received your request and are currently reviewing it and will get back to you via email as soon as possible.\n\nBest regards,\nGomed Team`
+          `Greetings!\n\nThank you for reaching out to us!\nWe have received your request and are currently reviewing it and we will get back to you via email as soon as possible.\n\nBest regards,\nGomed Team`
         );
     }
   }, [language]);
