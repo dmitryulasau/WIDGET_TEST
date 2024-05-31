@@ -7,6 +7,8 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
+import { styled } from "@mui/material/styles";
+import { MuiTelInput } from "mui-tel-input";
 
 import emailjs from "emailjs-com";
 
@@ -179,8 +181,7 @@ function Widget() {
       .required(translations["widget.error.emailrequired"]),
     location: Yup.string().required(translations["widget.error.location"]),
     phonenumber: Yup.string()
-      .matches(/^[0-9]+$/, translations["widget.error.phonedigits"])
-      .min(7, translations["widget.error.phoneshort"])
+      .min(12, translations["widget.error.phoneshort"])
       .required(translations["widget.error.phonerequired"]),
     services: Yup.string().required(translations["widget.error.service"]),
   });
@@ -255,6 +256,56 @@ function Widget() {
       services: "",
     });
   }, [language]);
+
+  // Define custom styles
+  const MuiTelInputWithFlags = styled(MuiTelInput)(({ theme }) => ({
+    "& .MuiFilledInput-root": {
+      fontFamily: "Montserrat",
+      color: "#000",
+      fontSize: "1.4rem",
+      overflow: "hidden",
+      borderRadius: 8,
+      backgroundColor: "var(--white)",
+      border: "1px solid",
+      borderColor: "var(--secondary-color)",
+      transition: theme.transitions.create([
+        "border-color",
+        "background-color",
+        "box-shadow",
+      ]),
+      "&:hover": {
+        backgroundColor: "var(--white)",
+      },
+      "&.Mui-focused": {
+        backgroundColor: "#fff",
+        boxShadow: `var(--secondary-color) 0 0 0 2px`,
+        borderColor: "var(--secondary-color)",
+      },
+    },
+    "& .MuiInputLabel-root": {
+      fontFamily: "Montserrat",
+      color: "#787878",
+      fontSize: "1.4rem",
+      "&.Mui-focused": {
+        color: "var(--secondary-color)",
+      },
+    },
+    "& .MuiFormHelperText-root": {
+      color: "var(--error-color)",
+      fontSize: "1.1rem",
+    },
+    "& .MuiFormHelperText-root.Mui-error": {
+      // Override error text color
+      color: "var(--error-color)",
+    },
+    "& .MuiInputLabel-root.Mui-error": {
+      color: "#656565",
+    },
+    "& .MuiFilledInput-root.Mui-error": {
+      borderColor: "var(--error-color)",
+      boxShadow: `var(--error-color) 0 0 0 2px`,
+    },
+  }));
 
   return (
     <div>
@@ -406,26 +457,29 @@ function Widget() {
                 {/* EMAIL END */}
 
                 {/* PHONE NUMBER */}
-                <Field
-                  InputProps={{ disableUnderline: true }}
-                  sx={inputstyle}
-                  variant="filled"
-                  name="phonenumber"
-                  type="text"
-                  label={translations["widget.contactnumber"]}
-                  as={TextField}
-                  fullWidth
-                  margin="normal"
-                  inputProps={{
-                    pattern: "\\d*",
-                    inputMode: "numeric",
-                  }}
-                  helperText={
-                    <div style={{ color: "var(--error-color)" }}>
-                      <ErrorMessage name="phonenumber" component="div" />
-                    </div>
-                  }
-                />
+                <Field name="phonenumber">
+                  {({ field, form }) => (
+                    <MuiTelInputWithFlags
+                      defaultCountry={"CZ"}
+                      InputProps={{ disableUnderline: true }}
+                      sx={inputstyle}
+                      variant="filled"
+                      {...field} // spread the field props to connect Formik with MuiTelInputWithFlags
+                      label={translations["widget.contactnumber"]}
+                      fullWidth
+                      margin="normal"
+                      inputProps={{ maxLength: 20 }}
+                      onChange={(value) =>
+                        form.setFieldValue(field.name, value)
+                      } // handle onChange to update Formik
+                      helperText={
+                        <div style={{ color: "var(--error-color)" }}>
+                          <ErrorMessage name="phonenumber" component="div" />
+                        </div>
+                      }
+                    />
+                  )}
+                </Field>
                 {/* PHONE NUMBER END */}
 
                 {/* INSURANCE */}
