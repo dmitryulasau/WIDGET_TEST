@@ -96,19 +96,19 @@ function Widget() {
       case "cz":
         setSubject("Potvrzení vaší žádosti k Gomed");
         setMessage(
-          `Zdravíme Vás!\n\nDěkujeme, že jste se obrátili na Gomed! \nVaši žádost jsme přijali a aktuálně pro vás vyhledáváme nejlepší možnou variantu. \nOzveme se vám co nejdříve e-mailem.\n\nS pozdravem,\nTým Gomed`
+          `Zdravíme Vás!\n\nDěkujeme, že jste se obrátili na Gomed! \nVaši žádost jsme přijali a ozveme se Vám co nejdříve e-mailem.\n\nS pozdravem,\nTým Gomed`
         );
         break;
       case "ru":
         setSubject("Подтверждение вашего запроса в Gomed");
         setMessage(
-          `Приветствуем вас!\n\nБлагодарим вас за обращение в Gomed! \nМы получили ваш запрос и сейчас подбираем для вас наилучший вариант. \nМы свяжемся с вами по электронной почте в ближайшее время.\n\nС наилучшими пожеланиями,\nКоманда Gomed`
+          `Приветствуем вас!\n\nБлагодарим вас за обращение в Gomed! \nМы получили ваш запрос и свяжемся с вами по электронной почте в ближайшее время.\n\nС наилучшими пожеланиями,\nКоманда Gomed`
         );
         break;
       default:
         setSubject("Confirmation of Your Request to Gomed");
         setMessage(
-          `Greetings!\n\nThank you for reaching out to us! \nWe have received your request and are currently reviewing it. \nWe are searching for the soonest and best option to meet your needs. We will get back to you via email as soon as possible.\n\nBest regards,\nGomed Team`
+          `Greetings!\n\nThank you for reaching out to us! \nWe have received your request and are currently reviewing it and will get back to you via email as soon as possible.\n\nBest regards,\nGomed Team`
         );
     }
   }, [language]);
@@ -136,6 +136,7 @@ function Widget() {
               insurance: formData.insurance,
               location: formData.location,
               services: formData.services,
+              language: language,
             };
 
             // Send the personal email
