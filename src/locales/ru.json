@@ -69,7 +69,7 @@
   "widget.error.lastname": "Требуется фамилия",
   "widget.error.insurance": "Пожалуйста укажите страховку",
   "widget.error.phonedigits": "Должны быть только цифры",
-  "widget.error.phoneshort": "Номер слишком короткий",
+  "widget.error.phoneshort": "Номер телефона с кодом страны",
   "widget.error.phonerequired": "Требуется номер телефона",
   "widget.error.invalidemail": "Неверный адрес электронной почты",
   "widget.error.emailrequired": "Требуется электронная почта",

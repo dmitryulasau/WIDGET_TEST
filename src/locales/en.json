@@ -71,7 +71,7 @@
   "widget.error.lastname": "Last name is required",
   "widget.error.insurance": "Please provide insurance",
   "widget.error.phonedigits": "Must be only digits",
-  "widget.error.phoneshort": "Number is too short",
+  "widget.error.phoneshort": "Phone number with country code",
   "widget.error.phonerequired": "Phone number is required",
   "widget.error.invalidemail": "Invalid email",
   "widget.error.emailrequired": "Email is required",

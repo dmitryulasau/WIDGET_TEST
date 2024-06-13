@@ -82,13 +82,11 @@ function Widget() {
   const form = useRef(null);
 
   const serviceId = import.meta.env.VITE_SERVICE_ID;
-  //TODO
   const appointmentTemplateId = import.meta.env.VITE_APPOINTMENT_TEMPLATE_ID;
   const userId = import.meta.env.VITE_USER_ID;
-  const personalEmailTemplateId = import.meta.env.VITE_CLIENT_INFO_TEMPLATE_ID; //TODO
+  const personalEmailTemplateId = import.meta.env.VITE_CLIENT_INFO_TEMPLATE_ID;
 
   // EMAIL
-
   const [subject, setSubject] = useState("");
   const [message, setMessage] = useState("");
 
@@ -117,9 +115,6 @@ function Widget() {
 
   const sendEmail = (formData) => {
     console.log(formData);
-
-    const personalEmail = import.meta.env.VITE_PERSONALEMAIL;
-
     if (form.current) {
       console.log(form.current);
 
@@ -132,7 +127,6 @@ function Widget() {
             setSubmitted(true);
 
             const personalEmailData = {
-              to_email: personalEmail,
               email: formData.email,
               phonenumber: formData.phonenumber,
               insurance: formData.insurance,
@@ -449,9 +443,9 @@ function Widget() {
                   fullWidth
                   margin="normal"
                   helperText={
-                    <div style={{ color: "var(--error-color)" }}>
+                    <span style={{ color: "var(--error-color)" }}>
                       <ErrorMessage name="email" component="div" />
-                    </div>
+                    </span>
                   }
                 />
                 {/* EMAIL END */}
@@ -473,9 +467,9 @@ function Widget() {
                         form.setFieldValue(field.name, value)
                       } // handle onChange to update Formik
                       helperText={
-                        <div style={{ color: "var(--error-color)" }}>
+                        <span style={{ color: "var(--error-color)" }}>
                           <ErrorMessage name="phonenumber" component="div" />
-                        </div>
+                        </span>
                       }
                     />
                   )}
@@ -494,9 +488,9 @@ function Widget() {
                   fullWidth
                   margin="normal"
                   helperText={
-                    <div style={{ color: "var(--error-color)" }}>
+                    <span style={{ color: "var(--error-color)" }}>
                       <ErrorMessage name="insurance" component="div" />
-                    </div>
+                    </span>
                   }
                   select
                 >
@@ -532,9 +526,9 @@ function Widget() {
                   fullWidth
                   margin="normal"
                   helperText={
-                    <div style={{ color: "var(--error-color)" }}>
+                    <span style={{ color: "var(--error-color)" }}>
                       <ErrorMessage name="location" component="div" />
-                    </div>
+                    </span>
                   }
                 />
                 {/* LOCATION END */}
@@ -553,9 +547,9 @@ function Widget() {
                   rows={2}
                   margin="normal"
                   helperText={
-                    <div style={{ color: "var(--error-color)" }}>
+                    <span style={{ color: "var(--error-color)" }}>
                       <ErrorMessage name="services" component="div" />
-                    </div>
+                    </span>
                   }
                 />
                 {/* SERVICES END */}

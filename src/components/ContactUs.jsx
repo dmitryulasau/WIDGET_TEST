@@ -19,31 +19,41 @@ export default function ContactUs() {
       ? ruTranslations
       : enTranslations;
 
-  let title, description;
+  let title, description, keywords;
 
   // Set title and meta description based on language
   switch (language) {
     case "en":
-      title = "Find Top Doctors in Prague Fast - Book Your Appointment Today";
+      title =
+        "Health Insurance for Expats in Prague | English-Speaking Doctors";
       description =
-        "Instantly find and book appointments with leading doctors in Prague. Our easy-to-use platform connects you with healthcare professionals. Get fast, reliable medical care today.";
+        "Find comprehensive health insurance for expats in Prague. Access English-speaking doctors, prenatal care, and specialist medical services.";
+      keywords =
+        "health insurance for expats, English-speaking doctors, prenatal care, specialist medical services, Prague";
       break;
     case "cz":
       title =
-        "Najděte nejlepší lékaře v Praze rychle - Rezervujte si svou návštěvu již dnes";
+        "Zdravotní pojištění pro cizince v Praze | Anglicky mluvící lékaři";
       description =
-        "Okamžitě najděte a rezervujte si schůzky s předními lékaři v Praze. Naše snadno použitelná platforma vás spojí se zdravotnickými profesionály. Získejte rychlou a spolehlivou lékařskou péči již dnes.";
+        "Získejte kompletní zdravotní pojištění pro cizince v Praze. Přístup k anglicky mluvícím lékařům a odborné lékařské služby.";
+      keywords =
+        "zdravotní pojištění pro cizince, anglicky mluvící lékaři, odborné lékařské služby, Praha";
       break;
     case "ru":
       title =
-        "Быстро Найдите Лучших Врачей в Праге - Запишитесь на Прием Сегодня";
+        "Медицинская страховка для экспатов в Праге | Англоговорящие врачи";
       description =
-        "Мгновенно находите и записывайтесь на прием к ведущим врачам Праги. Наш удобный сайт свяжет вас с профессионалами здравоохранения. Получите быструю и надежную медицинскую помощь уже сегодня.";
+        "Получите комплексную медицинскую страховку для экспатов в Праге. Доступ к англоговорящим врачам и специализированным медицинским услугам.";
+      keywords =
+        "медицинская страховка для экспатов, англоговорящие врачи, специализированные медицинские услуги, Прага";
       break;
     default:
-      title = "Find Top Doctors in Prague Fast - Book Your Appointment Today";
+      title =
+        "Health Insurance for Expats in Prague | English-Speaking Doctors";
       description =
-        "Instantly find and book appointments with leading doctors in Prague. Our easy-to-use platform connects you with healthcare professionals. Get fast, reliable medical care today.";
+        "Find comprehensive health insurance for expats in Prague. Access English-speaking doctors, prenatal care, and specialist medical services.";
+      keywords =
+        "health insurance for expats, English-speaking doctors, prenatal care, specialist medical services, Prague";
   }
 
   return (
@@ -52,6 +62,7 @@ export default function ContactUs() {
       <Helmet>
         <title>{title}</title>
         <meta name="description" content={description} />
+        <meta name="keywords" content={keywords}></meta>
       </Helmet>
       <Box
         sx={{

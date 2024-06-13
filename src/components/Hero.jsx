@@ -178,7 +178,7 @@ export default function Hero() {
                 letterSpacing: "0.02em",
               }}
             >
-              <div id="cta" style={{}}></div>
+              <span id="cta" style={{}}></span>
               {translations["hero.text"]}
               <br></br>
               {translations["hero.text2"]}
