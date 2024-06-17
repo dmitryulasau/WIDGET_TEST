@@ -81,17 +81,16 @@ function Widget() {
 
   const form = useRef(null);
 
+  // EMAIL
   const serviceId = import.meta.env.VITE_SERVICE_ID;
   const appointmentTemplateId = import.meta.env.VITE_APPOINTMENT_TEMPLATE_ID;
   const userId = import.meta.env.VITE_USER_ID;
   const personalEmailTemplateId = import.meta.env.VITE_CLIENT_INFO_TEMPLATE_ID;
 
-  // EMAIL
   const [subject, setSubject] = useState("");
   const [message, setMessage] = useState("");
 
   useEffect(() => {
-    // Populate subject and message based on selected language
     switch (language) {
       case "cz":
         setSubject("Potvrzení vaší žádosti k Gomed");

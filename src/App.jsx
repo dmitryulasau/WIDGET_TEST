@@ -47,7 +47,7 @@ function App() {
 
         {/* MAIN CONTENT END*/}
       </Container>
-      <Widget />
+      {/* <Widget /> */}
     </>
   );
 }

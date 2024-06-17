@@ -187,9 +187,7 @@ export default function CTAForm() {
     email: "",
     phoneNumber: "",
     insuranceProvider: "",
-    // specialists: [],
-    location: "",
-    description: "",
+    specialists: [],
     language: navigator.language || navigator.userLanguage,
     partner: partner,
   });
@@ -331,9 +329,7 @@ export default function CTAForm() {
       insuranceProvider: formData.insuranceProvider,
       email: formData.email,
       language: formData.language,
-      // specialists: formData.specialists,
-      location: formData.location,
-      description: formData.description,
+      specialists: formData.specialists,
       isPrivacyPolicyConsentGiven: isChecked,
       partner: formData.partner,
     };
@@ -357,9 +353,7 @@ export default function CTAForm() {
           email: "",
           phoneNumber: "",
           insuranceProvider: "",
-          // specialists: [],
-          location: "",
-          description: "",
+          specialists: [],
           language: "",
           partner: "",
         });
@@ -386,9 +380,7 @@ export default function CTAForm() {
       email: "",
       phoneNumber: "",
       insuranceProvider: "",
-      // specialists: [],
-      location: "",
-      description: "",
+      specialists: [],
       language: navigator.language || navigator.userLanguage,
       partner: partner,
     });
@@ -403,8 +395,6 @@ export default function CTAForm() {
       phoneNumber: "Phone number with country code",
       insuranceProvider: "Please choose your medical insurance",
       specialists: "Please choose specialists",
-      location: "Location is required",
-      description: "Please fill in this field",
       privacyPolicy: "Please agree to the privacy policy",
     },
     cz: {
@@ -414,8 +404,6 @@ export default function CTAForm() {
       phoneNumber: "Telefonní číslo s kódem země",
       insuranceProvider: "Prosím vyberte svoje pojištění",
       specialists: "Prosím vyberte specialisty",
-      location: "Místo je povinné",
-      description: "Vyplňte prosím toto pole",
       privacyPolicy: "Souhlas s ochranou osobních údajů je povinný",
     },
     ru: {
@@ -425,8 +413,6 @@ export default function CTAForm() {
       phoneNumber: "Номер телефона с кодом страны",
       insuranceProvider: "Пожалуйста, выберите свою медицинскую страховку",
       specialists: "Пожалуйста, выберите специалистов",
-      location: "Укажите местоположение",
-      description: "Пожалуйста, заполните это поле",
       privacyPolicy: "Пожалуйста, согласитесь с политикой конфиденциальности",
     },
   };
@@ -457,14 +443,6 @@ export default function CTAForm() {
       "array.base": errorMessages[language].specialists,
       "array.required": errorMessages[language].specialists,
       "any.required": errorMessages[language].specialists,
-    }),
-    location: Joi.string().required().messages({
-      "string.empty": errorMessages[language].location,
-      "any.required": errorMessages[language].location,
-    }),
-    description: Joi.string().required().messages({
-      "string.empty": errorMessages[language].description,
-      "any.required": errorMessages[language].description,
     }),
     language: Joi.string().required(),
     partner: Joi.string().allow(""),
@@ -507,102 +485,8 @@ export default function CTAForm() {
       });
   }, [language]);
 
-  // EMAIL
-  const serviceId = import.meta.env.VITE_SERVICE_ID;
-  const appointmentTemplateId = import.meta.env.VITE_APPOINTMENT_TEMPLATE_ID;
-  const userId = import.meta.env.VITE_USER_ID;
-  const personalEmailTemplateId = import.meta.env.VITE_CLIENT_INFO_TEMPLATE_ID;
-
-  const [subject, setSubject] = useState("");
-  const [message, setMessage] = useState("");
-
-  useEffect(() => {
-    switch (language) {
-      case "cz":
-        setSubject("Potvrzení vaší žádosti k Gomed");
-        setMessage(
-          `Zdravíme Vás!\n\nDěkujeme, že jste se obrátili na Gomed! \nVaši žádost jsme přijali a ozveme se Vám co nejdříve e-mailem.\n\nS pozdravem,\nTým Gomed`
-        );
-        break;
-      case "ru":
-        setSubject("Подтверждение вашего запроса в Gomed");
-        setMessage(
-          `Приветствуем Вас!\n\nБлагодарим Вас за обращение в Gomed! \nМы получили Ваш запрос и свяжемся с Вами по электронной почте в ближайшее время.\n\nС наилучшими пожеланиями,\nКоманда Gomed`
-        );
-        break;
-      default:
-        setSubject("Confirmation of Your Request to Gomed");
-        setMessage(
-          `Greetings!\n\nThank you for reaching out to us!\nWe have received your request and are currently reviewing it and we will get back to you via email as soon as possible.\n\nBest regards,\nGomed Team`
-        );
-    }
-  }, [language]);
-
-  const sendEmail = (formData) => {
-    console.log(formData);
-    if (form.current) {
-      console.log(form.current);
-
-      // Send the client email along with the form data and emailDataClient
-      emailjs
-        .sendForm(serviceId, appointmentTemplateId, form.current, userId)
-        .then(
-          (result) => {
-            console.log("Client email successfully sent!", result.text);
-            setSubmitted(true);
-
-            const personalEmailData = {
-              email: formData.email,
-              phonenumber: formData.phonenumber,
-              insurance: formData.insurance,
-              location: formData.location,
-              services: formData.services,
-              language: language,
-            };
-
-            // Send the personal email
-            emailjs
-              .send(
-                serviceId,
-                personalEmailTemplateId,
-                personalEmailData,
-                userId
-              )
-              .then(
-                (personalResult) => {
-                  console.log(
-                    "Personal email successfully sent!",
-                    personalResult.text
-                  );
-                },
-                (personalError) => {
-                  console.error(
-                    "Personal email sending failed:",
-                    personalError.text
-                  );
-                }
-              );
-          },
-          (error) => {
-            console.error("Client email sending failed:", error.text);
-          }
-        );
-    } else {
-      console.error("Form element not found or not mounted yet.");
-    }
-  };
   return (
-    <Box
-      sx={{
-        width: {
-          xs: "92vw",
-          sm: "50vw",
-          md: "40vw",
-          lg: "30vw",
-          xl: "19vw",
-        },
-      }}
-    >
+    <Box sx={{ maxWidth: "29rem" }}>
       <div id="CTA" style={{}}></div>
 
       <Toaster
@@ -634,8 +518,7 @@ export default function CTAForm() {
           justifyContent: "space-between",
           padding: "2rem 1.6rem",
           borderRadius: "1.5rem",
-          minHeight: "62rem",
-          zIndex: "1000",
+          minHeight: "58rem",
         }}
       >
         <Box
@@ -652,29 +535,15 @@ export default function CTAForm() {
           sx={{
             fontFamily: "Montserrat",
             color: "var(--white)",
-
-            fontWeight: "800",
+            fontSize: { xs: "1.6rem", sm: "1.8rem", md: "2rem" },
+            fontWeight: "bold",
             textAlign: "center",
             padding: "0 2rem",
             letterSpacing: "0.08em",
           }}
         >
-          <Box
-            sx={{
-              mb: 1,
-              fontSize: { xs: "1.6rem", sm: "1.8rem", md: "1.8rem" },
-            }}
-          >
-            {translations["widget.heading"]}
-          </Box>
-          <Box
-            sx={{
-              fontSize: { xs: "1.6rem", sm: "1.8rem", md: "1.4rem" },
-              mb: "0.5rem",
-            }}
-          >
-            {translations["widget.subheading"]}
-          </Box>
+          {translations["ctaform.title"]}
+          {/* READY FOR A HEALTHIER TOMORROW? */}
         </Typography>
 
         {/* EMAIL */}
@@ -738,7 +607,7 @@ export default function CTAForm() {
         </CssTextField>
 
         {/* SPECIALIST */}
-        {/* <CssTextField
+        <CssTextField
           name="specialists"
           select
           label={translations["ctaform.specialist"]}
@@ -791,52 +660,16 @@ export default function CTAForm() {
                 : specialist.charAt(0).toUpperCase() + specialist.slice(1)}
             </MenuItem>
           ))}
-        </CssTextField> */}
-
-        {/* LOCATION */}
-        <CssTextField
-          name="location"
-          label={translations["widget.location"]}
-          variant="filled"
-          type="text"
-          value={formData.location}
-          onChange={handleInputChange}
-          error={!!errors.location}
-          helperText={errors.location}
-          sx={{
-            width: "100%",
-          }}
-        />
-        {/* LOCATION END */}
-
-        {/* DESCRIPTION */}
-        <CssTextField
-          name="description"
-          label={translations["widget.service"]}
-          variant="filled"
-          type="text"
-          value={formData.description}
-          onChange={handleInputChange}
-          error={!!errors.description}
-          helperText={errors.description}
-          multiline
-          rows={2}
-          sx={{
-            width: "100%",
-          }}
-        />
-        {/* DESCRIPTION END */}
-
+        </CssTextField>
         <Button
           sx={{
-            width: "100%",
             fontFamily: "Montserrat",
             color: "var(--white)",
             fontSize: "1.6rem",
             fontWeight: "bold",
             textTransform: "none",
             borderRadius: "1.2rem",
-            padding: "1rem 4rem",
+            padding: "0.3rem 4rem",
 
             background: "var(--secondary-color)",
             "&:hover": {
@@ -847,7 +680,7 @@ export default function CTAForm() {
           variant="contained"
           onClick={handleSubmit}
         >
-          {translations["widget.submit"]}
+          {translations["ctaform.submit"]}
           {/* Join our priority waitlist */}
         </Button>
         <Box sx={{ display: "flex", alignItems: "center", mt: 2 }}>

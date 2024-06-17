@@ -66,11 +66,11 @@ export default function Hero() {
 
             position: "absolute",
 
-            bottom: { xs: "60%", sm: "-60px" },
+            bottom: { xs: "62%", sm: "-60px" },
             right: { xs: "30%", sm: "330px", md: 0 },
 
             maxWidth: {
-              xs: language === "ru" ? "30%" : "40%",
+              xs: language === "ru" || language === "en" ? "30%" : "40%",
               sm: "18%",
               md: "32%",
               lg: "27.5%",
@@ -106,6 +106,7 @@ export default function Hero() {
               // background: "lightgreen",
 
               minHeight: "34rem",
+              maxWidth: "40rem",
 
               display: "flex",
               paddingRight: {
@@ -128,12 +129,12 @@ export default function Hero() {
                 fontFamily: "Montserrat",
                 color: "var(--white)",
                 fontSize: {
-                  xs: "1.4rem",
+                  xs: "1.3rem",
                   sm: "1.4rem",
                   md: "1.6rem",
-                  lg: "2rem",
+                  lg: language === "ru" ? "1.3rem" : "1.6rem",
                 },
-                fontWeight: "bold",
+                fontWeight: "800",
                 letterSpacing: "0.1em",
               }}
             >
@@ -173,7 +174,7 @@ export default function Hero() {
                   xs: "1.3rem",
                   sm: "1.4rem",
                   md: "1.2rem",
-                  lg: "1.8rem",
+                  lg: language === "ru" ? "1.6rem" : "1.8rem",
                 },
                 letterSpacing: "0.02em",
               }}
@@ -195,7 +196,7 @@ export default function Hero() {
             sx={{
               alignSelf: "center",
               position: "absolute",
-              top: { sm: "70%", md: "70%", lg: "78%" },
+              top: { sm: "70%", md: "70%", lg: "82%" },
               right: { sm: "0", md: "33%", lg: "28%", xl: "30%" },
               transform: "translateY(-50%)",
               "@media screen and (max-width: 599px)": {
