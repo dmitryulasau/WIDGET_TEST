@@ -226,7 +226,7 @@ export default function CTAForm() {
     phoneNumber: "",
     insuranceProvider: "",
     specialists: [],
-    location: "PRAHA",
+    location: "",
     description: "",
     language: navigator.language || navigator.userLanguage,
     partner: partner,
@@ -364,7 +364,7 @@ export default function CTAForm() {
               email: formData.email,
               phonenumber: formData.phoneNumber,
               insurance: formData.insuranceProvider,
-              location: "PRAHA",
+              location: formData.location,
               specialists: formData.specialists.join(", "),
               services: formData.description,
               language: language,
@@ -442,7 +442,7 @@ export default function CTAForm() {
       email: formData.email,
       language: formData.language,
       specialists: formData.specialists,
-      location: "PRAHA",
+      location: formData.location,
       description: formData.description,
       isPrivacyPolicyConsentGiven: isChecked,
       partner: formData.partner,
@@ -469,7 +469,7 @@ export default function CTAForm() {
           phoneNumber: "",
           insuranceProvider: "",
           specialists: [],
-          location: "PRAHA",
+          location: "",
           description: "",
           language: "",
           partner: "",
@@ -498,7 +498,7 @@ export default function CTAForm() {
       phoneNumber: "",
       insuranceProvider: "",
       specialists: [],
-      location: "PRAHA",
+      location: "",
       description: "",
       language: navigator.language || navigator.userLanguage,
       partner: partner,
@@ -693,14 +693,14 @@ export default function CTAForm() {
           >
             {translations["widget.subheading"]}
           </Box>
-          <Box
+          {/* <Box
             sx={{
               fontSize: { xs: "1.6rem", sm: "1.8rem", md: "1.4rem" },
               mb: "1rem",
             }}
           >
             {translations["widget.subheading2"]}
-          </Box>
+          </Box> */}
         </Typography>
 
         <form
@@ -845,7 +845,7 @@ export default function CTAForm() {
           </Box>
 
           {/* LOCATION */}
-          {/* <CssTextField
+          <CssTextField
             name="location"
             label={translations["widget.location"]}
             variant="filled"
@@ -857,7 +857,7 @@ export default function CTAForm() {
             sx={{
               width: "100%",
             }}
-          /> */}
+          />
           {/* LOCATION END */}
 
           {/* DESCRIPTION */}
