@@ -11,8 +11,8 @@
   "ctaform.title": "Limitovaná nabídka: 70% sleva na vaši první návštěvu!",
   "ctaform.email": "E-mailová adresa",
   "ctaform.phone": "Telefonní číslo",
-  "ctaform.insurance": "Vaše zdravotní pojištění",
-  "ctaform.specialist": "Které potřebujete specialisty?",
+  "ctaform.insurance": "Vaše pojištění",
+  "ctaform.specialist": "Specialisty",
   "ctaform.submit": "Přidejte se na seznam čekatelů",
   "ctaform.privacy": "Přečetl jsem si ",
   "ctaform.privacy2": "zásady ochrany osobních údajů",
@@ -54,6 +54,7 @@
 
   "widget.heading": "Potřebujete rychle lékaře?",
   "widget.subheading": "Zašlete nám žádost a zaručujeme okamžitou odpověď!",
+  "widget.subheading2": "Exkluzivně v Praze",
   "widget.firstname": "Jméno",
   "widget.lastname": "Příjmení",
   "widget.contactnumber": "Telefonní číslo",

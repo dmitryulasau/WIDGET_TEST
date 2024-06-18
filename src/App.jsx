@@ -10,7 +10,7 @@ import Hero from "./components/Hero.jsx";
 
 import "smoothscroll-polyfill";
 import Widget from "./components/Widget.jsx";
-import zIndex from "@mui/material/styles/zIndex.js";
+
 
 window.__forceSmoothScrollPolyfill__ = true;
 

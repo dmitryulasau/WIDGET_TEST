@@ -226,7 +226,7 @@ export default function CTAForm() {
     phoneNumber: "",
     insuranceProvider: "",
     specialists: [],
-    location: "",
+    location: "PRAHA",
     description: "",
     language: navigator.language || navigator.userLanguage,
     partner: partner,
@@ -364,7 +364,7 @@ export default function CTAForm() {
               email: formData.email,
               phonenumber: formData.phoneNumber,
               insurance: formData.insuranceProvider,
-              location: formData.location,
+              location: "PRAHA",
               specialists: formData.specialists.join(", "),
               services: formData.description,
               language: language,
@@ -405,7 +405,7 @@ export default function CTAForm() {
 
   const handleSubmit = () => {
     console.log(formData);
-    sendEmail(formData);
+
     // formData.phoneNumber = formData.phoneNumber.
     const { error } = schema.validate(formData, { abortEarly: false });
 
@@ -442,7 +442,7 @@ export default function CTAForm() {
       email: formData.email,
       language: formData.language,
       specialists: formData.specialists,
-      location: formData.location,
+      location: "PRAHA",
       description: formData.description,
       isPrivacyPolicyConsentGiven: isChecked,
       partner: formData.partner,
@@ -462,19 +462,20 @@ export default function CTAForm() {
         config
       )
       .then((response) => {
+        sendEmail(formData);
         console.log("Form submitted successfully:", response.data);
         setFormData({
           email: "",
           phoneNumber: "",
           insuranceProvider: "",
           specialists: [],
-          location: "",
+          location: "PRAHA",
           description: "",
           language: "",
           partner: "",
         });
         setErrors({});
-        toast.success("Thank you for joining our list!", {
+        toast.success(translations["widget.thankyou"], {
           id: "join-list-toast",
         });
         setIsChecked(false);
@@ -497,7 +498,7 @@ export default function CTAForm() {
       phoneNumber: "",
       insuranceProvider: "",
       specialists: [],
-      location: "",
+      location: "PRAHA",
       description: "",
       language: navigator.language || navigator.userLanguage,
       partner: partner,
@@ -512,7 +513,7 @@ export default function CTAForm() {
       phoneNumberEmpty: "Phone number is required",
       phoneNumber: "Phone number with country code",
       insuranceProvider: "Insurance is required",
-      specialists: "Specialist is required",
+      specialists: "Choose a specialist",
       location: "Location is required",
       description: "Please fill in this field",
       privacyPolicy: "Please agree to the privacy policy",
@@ -523,7 +524,7 @@ export default function CTAForm() {
       phoneNumberEmpty: "Telefonní číslo je povinné",
       phoneNumber: "Telefonní číslo s kódem země",
       insuranceProvider: "Pojištění je vyžadováno",
-      specialists: "Je vyžadován specialista",
+      specialists: "Vyberte si specialistu",
       location: "Místo je povinné",
       description: "Vyplňte prosím toto pole",
       privacyPolicy: "Souhlas s ochranou osobních údajů je povinný",
@@ -534,7 +535,7 @@ export default function CTAForm() {
       phoneNumberEmpty: "Требуется номер телефона",
       phoneNumber: "Номер телефона с кодом страны",
       insuranceProvider: "Требуется страховка",
-      specialists: "Требуется специалист",
+      specialists: "Выберите специалиста",
       location: "Укажите местоположение",
       description: "Пожалуйста, заполните это поле",
       privacyPolicy: "Пожалуйста, согласитесь с политикой конфиденциальности",
@@ -618,17 +619,7 @@ export default function CTAForm() {
   }, [language]);
 
   return (
-    <Box
-      sx={{
-        width: {
-          xs: "92vw",
-          sm: "50vw",
-          md: "40vw",
-          lg: "30vw",
-          xl: "19vw",
-        },
-      }}
-    >
+    <Box sx={{ maxWidth: { xs: "35rem", xl: "38rem" } }}>
       <div id="CTA" style={{}}></div>
 
       <Toaster
@@ -658,10 +649,10 @@ export default function CTAForm() {
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          gap: "2rem",
+          gap: { sm: "1rem", md: "2rem" },
           padding: "2rem 1.6rem",
           borderRadius: "1.5rem",
-          minHeight: "62rem",
+          minHeight: "58rem",
           zIndex: "1000",
         }}
       >
@@ -702,6 +693,14 @@ export default function CTAForm() {
           >
             {translations["widget.subheading"]}
           </Box>
+          <Box
+            sx={{
+              fontSize: { xs: "1.6rem", sm: "1.8rem", md: "1.4rem" },
+              mb: "1rem",
+            }}
+          >
+            {translations["widget.subheading2"]}
+          </Box>
         </Typography>
 
         <form
@@ -709,10 +708,11 @@ export default function CTAForm() {
           ref={form}
           style={{
             display: "flex",
+
             gap: "0.8rem",
             flexDirection: "column",
 
-            maxWidth: "95%",
+            maxWidth: "94%",
           }}
         >
           {/* EMAIL */}
@@ -751,6 +751,7 @@ export default function CTAForm() {
               width: "100%",
               display: "flex",
               gap: "1rem",
+              flexDirection: { xs: "column", sm: "row" },
 
               justifyContent: "space-between",
             }}
@@ -844,7 +845,7 @@ export default function CTAForm() {
           </Box>
 
           {/* LOCATION */}
-          <CssTextField
+          {/* <CssTextField
             name="location"
             label={translations["widget.location"]}
             variant="filled"
@@ -856,7 +857,7 @@ export default function CTAForm() {
             sx={{
               width: "100%",
             }}
-          />
+          /> */}
           {/* LOCATION END */}
 
           {/* DESCRIPTION */}

@@ -66,12 +66,12 @@ export default function Hero() {
 
             position: "absolute",
 
-            bottom: { xs: "62%", sm: "-60px" },
-            right: { xs: "30%", sm: "330px", md: 0 },
+            bottom: { xs: "61%", sm: "-60px" },
+            right: { xs: "30%", sm: "420px", md: 0 },
 
             maxWidth: {
               xs: language === "ru" || language === "en" ? "30%" : "40%",
-              sm: "18%",
+              sm: "12%",
               md: "32%",
               lg: "27.5%",
               xl: "30%",
@@ -119,7 +119,7 @@ export default function Hero() {
               justifyContent: { md: "center", lg: "space-between" },
               alignSelf: { sm: "flex-start", md: "center" },
               gap: { xs: "3rem", sm: "2rem", md: "3rem" },
-              flex: { sm: "0 1 50%", md: "0 1 50%", lg: "0 1 50%" },
+              flex: { sm: "0 1 44%", md: "0 1 70%", lg: "0 1 50%" },
             }}
           >
             {/* HERO HEADING  */}
@@ -172,7 +172,7 @@ export default function Hero() {
                 color: "var(--white)",
                 fontSize: {
                   xs: "1.3rem",
-                  sm: "1.4rem",
+                  sm: "1.2rem",
                   md: "1.2rem",
                   lg: language === "ru" ? "1.6rem" : "1.8rem",
                 },
@@ -194,7 +194,6 @@ export default function Hero() {
           {/* FORM */}
           <Box
             sx={{
-              zIndex: 901,
               alignSelf: "center",
               position: "absolute",
               top: { sm: "70%", md: "70%", lg: "82%" },
