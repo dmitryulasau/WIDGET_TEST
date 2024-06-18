@@ -7,6 +7,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { MuiTelInput } from "mui-tel-input";
 import { styled } from "@mui/material/styles";
+import FormControl from "@mui/material/FormControl";
 
 import { useState, useEffect } from "react";
 import MenuItem from "@mui/material/MenuItem";
@@ -27,6 +28,9 @@ import ruTranslations from "../locales/ru.json";
 import { useContext } from "react";
 
 import CryptoJS from "crypto-js";
+
+import emailjs from "emailjs-com";
+import { useRef } from "react";
 
 const secretKey = import.meta.env.VITE_SECRET_KEY;
 const decodedKey = CryptoJS.enc.Base64.parse(secretKey);
@@ -159,6 +163,12 @@ const otherTranslations = {
   cz: "Další",
 };
 
+const otherTranslationsSpec = {
+  en: "Other",
+  ru: "Другой",
+  cz: "Další",
+};
+
 export default function CTAForm() {
   const urlParams = new URLSearchParams(window.location.search);
   const partnerName = urlParams.get("partnerName");
@@ -174,6 +184,34 @@ export default function CTAForm() {
       ? ruTranslations
       : enTranslations;
 
+  const [subject, setSubject] = useState("");
+  const [message, setMessage] = useState("");
+
+  useEffect(() => {
+    switch (language) {
+      case "cz":
+        setSubject("Potvrzení vaší žádosti k Gomed");
+        setMessage(
+          `Zdravíme Vás!\n\nDěkujeme, že jste se obrátili na Gomed! \nVaši žádost jsme přijali a ozveme se Vám co nejdříve e-mailem.\n\nS pozdravem,\nTým Gomed`
+        );
+        break;
+      case "ru":
+        setSubject("Подтверждение вашего запроса в Gomed");
+        setMessage(
+          `Приветствуем Вас!\n\nБлагодарим Вас за обращение в Gomed! \nМы получили Ваш запрос и свяжемся с Вами по электронной почте в ближайшее время.\n\nС наилучшими пожеланиями,\nКоманда Gomed`
+        );
+        break;
+      default:
+        setSubject("Confirmation of Your Request to Gomed");
+        setMessage(
+          `Greetings!\n\nThank you for reaching out to us!\nWe have received your request and are currently reviewing it and we will get back to you via email as soon as possible.\n\nBest regards,\nGomed Team`
+        );
+    }
+  }, [language]);
+
+  const translatedOther =
+    otherTranslationsSpec[language] || otherTranslations.en;
+
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -187,11 +225,13 @@ export default function CTAForm() {
     email: "",
     phoneNumber: "",
     insuranceProvider: "",
-    // specialists: [],
+    specialists: [],
     location: "",
     description: "",
     language: navigator.language || navigator.userLanguage,
     partner: partner,
+    subject: subject,
+    message: message,
   });
 
   const [errors, setErrors] = useState({});
@@ -295,7 +335,77 @@ export default function CTAForm() {
     }
   };
 
+  // EMAIL
+  const form = useRef(null);
+
+  const serviceId = import.meta.env.VITE_SERVICE_ID;
+  const appointmentTemplateId = import.meta.env.VITE_APPOINTMENT_TEMPLATE_ID;
+  const userId = import.meta.env.VITE_USER_ID;
+  const personalEmailTemplateId = import.meta.env.VITE_CLIENT_INFO_TEMPLATE_ID;
+
+  const sendEmail = (formData) => {
+    console.log(formData);
+
+    if (form.current) {
+      // console.log(form.current);
+
+      // Send the client email along with the form data and emailDataClient
+      emailjs
+        .sendForm(serviceId, appointmentTemplateId, form.current, userId)
+        .then(
+          (result) => {
+            console.log("Client email successfully sent!", result.text);
+
+            const partnerDisplay = formData.partner
+              ? formData.partner
+              : "No partner";
+
+            const personalEmailData = {
+              email: formData.email,
+              phonenumber: formData.phoneNumber,
+              insurance: formData.insuranceProvider,
+              location: formData.location,
+              specialists: formData.specialists.join(", "),
+              services: formData.description,
+              language: language,
+              partner: partnerDisplay,
+            };
+
+            // Send the personal email
+            emailjs
+              .send(
+                serviceId,
+                personalEmailTemplateId,
+                personalEmailData,
+                userId
+              )
+              .then(
+                (personalResult) => {
+                  console.log(
+                    "Personal email successfully sent!",
+                    personalResult.text
+                  );
+                },
+                (personalError) => {
+                  console.error(
+                    "Personal email sending failed:",
+                    personalError.text
+                  );
+                }
+              );
+          },
+          (error) => {
+            console.error("Client email sending failed:", error.text);
+          }
+        );
+    } else {
+      console.error("Form element not found or not mounted yet.");
+    }
+  };
+
   const handleSubmit = () => {
+    console.log(formData);
+    sendEmail(formData);
     // formData.phoneNumber = formData.phoneNumber.
     const { error } = schema.validate(formData, { abortEarly: false });
 
@@ -331,7 +441,7 @@ export default function CTAForm() {
       insuranceProvider: formData.insuranceProvider,
       email: formData.email,
       language: formData.language,
-      // specialists: formData.specialists,
+      specialists: formData.specialists,
       location: formData.location,
       description: formData.description,
       isPrivacyPolicyConsentGiven: isChecked,
@@ -357,7 +467,7 @@ export default function CTAForm() {
           email: "",
           phoneNumber: "",
           insuranceProvider: "",
-          // specialists: [],
+          specialists: [],
           location: "",
           description: "",
           language: "",
@@ -386,7 +496,7 @@ export default function CTAForm() {
       email: "",
       phoneNumber: "",
       insuranceProvider: "",
-      // specialists: [],
+      specialists: [],
       location: "",
       description: "",
       language: navigator.language || navigator.userLanguage,
@@ -401,8 +511,8 @@ export default function CTAForm() {
       email: "Please enter a valid email address",
       phoneNumberEmpty: "Phone number is required",
       phoneNumber: "Phone number with country code",
-      insuranceProvider: "Please choose your medical insurance",
-      specialists: "Please choose specialists",
+      insuranceProvider: "Insurance is required",
+      specialists: "Specialist is required",
       location: "Location is required",
       description: "Please fill in this field",
       privacyPolicy: "Please agree to the privacy policy",
@@ -412,8 +522,8 @@ export default function CTAForm() {
       email: "Prosím zadejte platnou e-mailovou adresu",
       phoneNumberEmpty: "Telefonní číslo je povinné",
       phoneNumber: "Telefonní číslo s kódem země",
-      insuranceProvider: "Prosím vyberte svoje pojištění",
-      specialists: "Prosím vyberte specialisty",
+      insuranceProvider: "Pojištění je vyžadováno",
+      specialists: "Je vyžadován specialista",
       location: "Místo je povinné",
       description: "Vyplňte prosím toto pole",
       privacyPolicy: "Souhlas s ochranou osobních údajů je povinný",
@@ -423,8 +533,8 @@ export default function CTAForm() {
       email: "Пожалуйста, введите действительный адрес электронной почты",
       phoneNumberEmpty: "Требуется номер телефона",
       phoneNumber: "Номер телефона с кодом страны",
-      insuranceProvider: "Пожалуйста, выберите свою медицинскую страховку",
-      specialists: "Пожалуйста, выберите специалистов",
+      insuranceProvider: "Требуется страховка",
+      specialists: "Требуется специалист",
       location: "Укажите местоположение",
       description: "Пожалуйста, заполните это поле",
       privacyPolicy: "Пожалуйста, согласитесь с политикой конфиденциальности",
@@ -507,90 +617,6 @@ export default function CTAForm() {
       });
   }, [language]);
 
-  // EMAIL
-  const serviceId = import.meta.env.VITE_SERVICE_ID;
-  const appointmentTemplateId = import.meta.env.VITE_APPOINTMENT_TEMPLATE_ID;
-  const userId = import.meta.env.VITE_USER_ID;
-  const personalEmailTemplateId = import.meta.env.VITE_CLIENT_INFO_TEMPLATE_ID;
-
-  const [subject, setSubject] = useState("");
-  const [message, setMessage] = useState("");
-
-  useEffect(() => {
-    switch (language) {
-      case "cz":
-        setSubject("Potvrzení vaší žádosti k Gomed");
-        setMessage(
-          `Zdravíme Vás!\n\nDěkujeme, že jste se obrátili na Gomed! \nVaši žádost jsme přijali a ozveme se Vám co nejdříve e-mailem.\n\nS pozdravem,\nTým Gomed`
-        );
-        break;
-      case "ru":
-        setSubject("Подтверждение вашего запроса в Gomed");
-        setMessage(
-          `Приветствуем Вас!\n\nБлагодарим Вас за обращение в Gomed! \nМы получили Ваш запрос и свяжемся с Вами по электронной почте в ближайшее время.\n\nС наилучшими пожеланиями,\nКоманда Gomed`
-        );
-        break;
-      default:
-        setSubject("Confirmation of Your Request to Gomed");
-        setMessage(
-          `Greetings!\n\nThank you for reaching out to us!\nWe have received your request and are currently reviewing it and we will get back to you via email as soon as possible.\n\nBest regards,\nGomed Team`
-        );
-    }
-  }, [language]);
-
-  const sendEmail = (formData) => {
-    console.log(formData);
-    if (form.current) {
-      console.log(form.current);
-
-      // Send the client email along with the form data and emailDataClient
-      emailjs
-        .sendForm(serviceId, appointmentTemplateId, form.current, userId)
-        .then(
-          (result) => {
-            console.log("Client email successfully sent!", result.text);
-            setSubmitted(true);
-
-            const personalEmailData = {
-              email: formData.email,
-              phonenumber: formData.phonenumber,
-              insurance: formData.insurance,
-              location: formData.location,
-              services: formData.services,
-              language: language,
-            };
-
-            // Send the personal email
-            emailjs
-              .send(
-                serviceId,
-                personalEmailTemplateId,
-                personalEmailData,
-                userId
-              )
-              .then(
-                (personalResult) => {
-                  console.log(
-                    "Personal email successfully sent!",
-                    personalResult.text
-                  );
-                },
-                (personalError) => {
-                  console.error(
-                    "Personal email sending failed:",
-                    personalError.text
-                  );
-                }
-              );
-          },
-          (error) => {
-            console.error("Client email sending failed:", error.text);
-          }
-        );
-    } else {
-      console.error("Form element not found or not mounted yet.");
-    }
-  };
   return (
     <Box
       sx={{
@@ -631,7 +657,8 @@ export default function CTAForm() {
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          justifyContent: "space-between",
+          justifyContent: "center",
+          gap: "2rem",
           padding: "2rem 1.6rem",
           borderRadius: "1.5rem",
           minHeight: "62rem",
@@ -677,252 +704,275 @@ export default function CTAForm() {
           </Box>
         </Typography>
 
-        {/* EMAIL */}
-        <CssTextField
-          name="email"
-          label={translations["ctaform.email"]}
-          variant="filled"
-          type="email"
-          value={formData.email}
-          onChange={handleInputChange}
-          error={!!errors.email}
-          helperText={errors.email}
-          sx={{
-            width: "100%",
+        <form
+          id="form"
+          ref={form}
+          style={{
+            display: "flex",
+            gap: "0.8rem",
+            flexDirection: "column",
+
+            maxWidth: "95%",
           }}
-        />
-
-        {/* PHONE */}
-        <MuiTelInputWithFlags
-          defaultCountry={"CZ"}
-          name="phoneNumber"
-          variant="filled"
-          label={translations["ctaform.phone"]}
-          onChange={handlePhoneNumberChange}
-          value={formData.phoneNumber}
-          fullWidth={true}
-          error={!!errors.phoneNumber}
-          helperText={errors.phoneNumber}
-          disableFormatting={true}
-          inputProps={{ maxLength: 20 }}
-          InputProps={{ disableUnderline: true }}
-        />
-
-        {/* INSURANCE */}
-        <CssTextField
-          name="insuranceProvider"
-          select
-          label={translations["ctaform.insurance"]}
-          variant="filled"
-          value={formData.insuranceProvider}
-          onChange={handleInputChange}
-          error={!!errors.insuranceProvider}
-          helperText={errors.insuranceProvider}
-          sx={{ width: "100%" }}
         >
-          {[...insuranceProviders, "Other"].map((insuranceProvider, index) => (
-            <MenuItem
-              sx={{
-                fontFamily: "Montserrat",
-                letterSpacing: "0.1em",
-                color: "#787878",
-              }}
-              key={index}
-              value={insuranceProvider}
-            >
-              {insuranceProvider === "Other"
-                ? otherTranslations[language]
-                : insuranceProvider}
-            </MenuItem>
-          ))}
-        </CssTextField>
-
-        {/* SPECIALIST */}
-        {/* <CssTextField
-          name="specialists"
-          select
-          label={translations["ctaform.specialist"]}
-          variant="filled"
-          value={formData.specialists}
-          onChange={handleInputChange}
-          error={!!errors.specialists}
-          helperText={errors.specialists}
-          SelectProps={{
-            multiple: true,
-            renderValue: (selected) => {
-              return selected
-                .map((selectedSpecialist) => {
-                  return (
-                    selectedSpecialist.charAt(0).toUpperCase() +
-                    selectedSpecialist.slice(1)
-                  );
-                })
-                .join(", ");
-            },
-          }}
-          sx={{ width: "100%" }}
-        >
-          {specialists.map((specialist, index) => (
-            <MenuItem
-              key={index}
-              value={specialist}
-              sx={{
-                fontFamily: "Montserrat",
-                letterSpacing: "0.1em",
-                color: "#787878",
-              }}
-            >
-              <Checkbox
-                checked={formData.specialists.includes(specialist)}
-                sx={{
-                  "&.MuiCheckbox-root": {
-                    color: "var(--secondary-color)",
-                  },
-                  "& .MuiSvgIcon-root": { fontSize: "2rem" },
-                  "&.Mui-checked": {
-                    color: "var(--secondary-color)", // Change the color when the checkbox is checked
-                  },
-                }}
-              />
-              {specialist.length > 20
-                ? `${(
-                    specialist.charAt(0).toUpperCase() + specialist.slice(1)
-                  ).substring(0, 20)}...`
-                : specialist.charAt(0).toUpperCase() + specialist.slice(1)}
-            </MenuItem>
-          ))}
-        </CssTextField> */}
-
-        {/* LOCATION */}
-        <CssTextField
-          name="location"
-          label={translations["widget.location"]}
-          variant="filled"
-          type="text"
-          value={formData.location}
-          onChange={handleInputChange}
-          error={!!errors.location}
-          helperText={errors.location}
-          sx={{
-            width: "100%",
-          }}
-        />
-        {/* LOCATION END */}
-
-        {/* DESCRIPTION */}
-        <CssTextField
-          name="description"
-          label={translations["widget.service"]}
-          variant="filled"
-          type="text"
-          value={formData.description}
-          onChange={handleInputChange}
-          error={!!errors.description}
-          helperText={errors.description}
-          multiline
-          rows={2}
-          sx={{
-            width: "100%",
-          }}
-        />
-        {/* DESCRIPTION END */}
-
-        <Button
-          sx={{
-            width: "100%",
-            fontFamily: "Montserrat",
-            color: "var(--white)",
-            fontSize: "1.6rem",
-            fontWeight: "bold",
-            textTransform: "none",
-            borderRadius: "1.2rem",
-            padding: "1rem 4rem",
-
-            background: "var(--secondary-color)",
-            "&:hover": {
-              background: "#9dd9f4",
-              color: "var(--primary-color)",
-            },
-          }}
-          variant="contained"
-          onClick={handleSubmit}
-        >
-          {translations["widget.submit"]}
-          {/* Join our priority waitlist */}
-        </Button>
-        <Box sx={{ display: "flex", alignItems: "center", mt: 2 }}>
-          <Checkbox
-            checked={isChecked}
-            onChange={handleCheckboxChange}
-            color="primary"
-            name="agreeToPrivacyPolicy"
+          {/* EMAIL */}
+          <CssTextField
+            name="email"
+            label={translations["ctaform.email"]}
+            variant="filled"
+            type="email"
+            value={formData.email}
+            onChange={handleInputChange}
+            error={!!errors.email}
+            helperText={errors.email}
             sx={{
-              "&.MuiCheckbox-root": {
-                color: checkboxError
-                  ? "var(--error-color)"
-                  : "var(--secondary-color)",
-              },
-              "& .MuiSvgIcon-root": { fontSize: "2rem" },
-              "&.Mui-checked": {
-                color: "var(--secondary-color)", // Change the color when the checkbox is checked
-              },
+              width: "100%",
             }}
           />
-          <Box>
-            <Typography
-              variant="body1"
-              sx={{
-                fontFamily: "Montserrat",
-                color: "var(--white)",
-                fontSize: "1.4rem",
-              }}
+
+          {/* PHONE */}
+          <MuiTelInputWithFlags
+            defaultCountry={"CZ"}
+            name="phoneNumber"
+            variant="filled"
+            label={translations["ctaform.phone"]}
+            onChange={handlePhoneNumberChange}
+            value={formData.phoneNumber}
+            fullWidth={true}
+            error={!!errors.phoneNumber}
+            helperText={errors.phoneNumber}
+            disableFormatting={true}
+            inputProps={{ maxLength: 20 }}
+            InputProps={{ disableUnderline: true }}
+          />
+
+          <Box
+            sx={{
+              width: "100%",
+              display: "flex",
+              gap: "1rem",
+
+              justifyContent: "space-between",
+            }}
+          >
+            {/* INSURANCE */}
+            <CssTextField
+              name="insuranceProvider"
+              select
+              label={translations["ctaform.insurance"]}
+              variant="filled"
+              value={formData.insuranceProvider}
+              onChange={handleInputChange}
+              error={!!errors.insuranceProvider}
+              helperText={errors.insuranceProvider}
+              sx={{ width: "100%" }}
             >
-              {translations["ctaform.privacy"]}
-              {/* I have read and agree to the */}
-              <span
-                className="hover-effect"
-                style={{
-                  cursor: "pointer",
-                  color: "var(--secondary-color)",
-                  textDecoration: "none",
-                  transition: "text-decoration 0.3s ease",
-                }}
-                onClick={handleOpen}
-                onMouseEnter={(e) =>
-                  (e.target.style.textDecoration = "underline")
-                }
-                onMouseLeave={(e) => (e.target.style.textDecoration = "none")} // Remove underline when not hovered
-              >
-                {translations["ctaform.privacy2"]}
+              {[...insuranceProviders, "Other"].map(
+                (insuranceProvider, index) => (
+                  <MenuItem
+                    sx={{
+                      fontFamily: "Montserrat",
+                      letterSpacing: "0.1em",
+                      color: "#787878",
+                    }}
+                    key={index}
+                    value={insuranceProvider}
+                  >
+                    {insuranceProvider === "Other"
+                      ? otherTranslations[language]
+                      : insuranceProvider}
+                  </MenuItem>
+                )
+              )}
+            </CssTextField>
 
-                {/* privacy policy */}
-              </span>
-              {language === "cz" && translations["ctaform.privacyCZ"]}
-            </Typography>
+            {/* SPECIALIST */}
+            <CssTextField
+              name="specialists"
+              select
+              label={translations["ctaform.specialist"]}
+              variant="filled"
+              value={formData.specialists}
+              onChange={handleInputChange}
+              error={!!errors.specialists}
+              helperText={errors.specialists}
+              SelectProps={{
+                multiple: true,
+                renderValue: (selected) => {
+                  return selected
+                    .map((selectedSpecialist) => {
+                      return (
+                        selectedSpecialist.charAt(0).toUpperCase() +
+                        selectedSpecialist.slice(1)
+                      );
+                    })
+                    .join(", ");
+                },
+              }}
+              sx={{ width: "100%" }}
+            >
+              {[...specialists, translatedOther].map((specialist, index) => (
+                <MenuItem
+                  key={index}
+                  value={specialist}
+                  sx={{
+                    fontFamily: "Montserrat",
+                    letterSpacing: "0.1em",
+                    color: "#787878",
+                  }}
+                >
+                  <Checkbox
+                    checked={formData.specialists.includes(specialist)}
+                    sx={{
+                      "&.MuiCheckbox-root": {
+                        color: "var(--secondary-color)",
+                      },
+                      "& .MuiSvgIcon-root": { fontSize: "2rem" },
+                      "&.Mui-checked": {
+                        color: "var(--secondary-color)", // Change the color when the checkbox is checked
+                      },
+                    }}
+                  />
+                  {specialist.length > 20
+                    ? `${(
+                        specialist.charAt(0).toUpperCase() + specialist.slice(1)
+                      ).substring(0, 20)}...`
+                    : specialist.charAt(0).toUpperCase() + specialist.slice(1)}
+                </MenuItem>
+              ))}
+            </CssTextField>
+          </Box>
 
-            {checkboxError && (
+          {/* LOCATION */}
+          <CssTextField
+            name="location"
+            label={translations["widget.location"]}
+            variant="filled"
+            type="text"
+            value={formData.location}
+            onChange={handleInputChange}
+            error={!!errors.location}
+            helperText={errors.location}
+            sx={{
+              width: "100%",
+            }}
+          />
+          {/* LOCATION END */}
+
+          {/* DESCRIPTION */}
+          <CssTextField
+            name="description"
+            label={translations["widget.service"]}
+            variant="filled"
+            type="text"
+            value={formData.description}
+            onChange={handleInputChange}
+            error={!!errors.description}
+            helperText={errors.description}
+            multiline
+            rows={2}
+            sx={{
+              width: "100%",
+            }}
+          />
+          {/* DESCRIPTION END */}
+
+          <Button
+            sx={{
+              width: "100%",
+              fontFamily: "Montserrat",
+              color: "var(--white)",
+              fontSize: "1.6rem",
+              fontWeight: "bold",
+              textTransform: "none",
+              borderRadius: "1.2rem",
+              padding: "1rem 4rem",
+
+              background: "var(--secondary-color)",
+              "&:hover": {
+                background: "#9dd9f4",
+                color: "var(--primary-color)",
+              },
+            }}
+            variant="contained"
+            onClick={handleSubmit}
+          >
+            {translations["widget.submit"]}
+            {/* Join our priority waitlist */}
+          </Button>
+          <Box sx={{ display: "flex", alignItems: "center", mt: 2 }}>
+            <Checkbox
+              checked={isChecked}
+              onChange={handleCheckboxChange}
+              color="primary"
+              name="agreeToPrivacyPolicy"
+              sx={{
+                "&.MuiCheckbox-root": {
+                  color: checkboxError
+                    ? "var(--error-color)"
+                    : "var(--secondary-color)",
+                },
+                "& .MuiSvgIcon-root": { fontSize: "2rem" },
+                "&.Mui-checked": {
+                  color: "var(--secondary-color)", // Change the color when the checkbox is checked
+                },
+              }}
+            />
+            <Box>
               <Typography
-                variant="body2"
-                color="error"
+                variant="body1"
                 sx={{
                   fontFamily: "Montserrat",
-                  fontWeight: "500",
-                  fontSize: "1.1rem",
-                  color: "var(--error-color)",
+                  color: "var(--white)",
+                  fontSize: "1.4rem",
                 }}
               >
-                {checkboxError}
+                {translations["ctaform.privacy"]}
+                {/* I have read and agree to the */}
+                <span
+                  className="hover-effect"
+                  style={{
+                    cursor: "pointer",
+                    color: "var(--secondary-color)",
+                    textDecoration: "none",
+                    transition: "text-decoration 0.3s ease",
+                  }}
+                  onClick={handleOpen}
+                  onMouseEnter={(e) =>
+                    (e.target.style.textDecoration = "underline")
+                  }
+                  onMouseLeave={(e) => (e.target.style.textDecoration = "none")} // Remove underline when not hovered
+                >
+                  {translations["ctaform.privacy2"]}
+
+                  {/* privacy policy */}
+                </span>
+                {language === "cz" && translations["ctaform.privacyCZ"]}
               </Typography>
-            )}
-          </Box>
-          <Modal
-            open={open}
-            onClose={handleClose}
-            aria-labelledby="modal-modal-title"
-            aria-describedby="modal-modal-description"
-          >
-            <Box sx={style} style={{ maxHeight: "80vh", overflowY: "auto" }}>
-              {/* <Typography
+
+              {checkboxError && (
+                <Typography
+                  variant="body2"
+                  color="error"
+                  sx={{
+                    fontFamily: "Montserrat",
+                    fontWeight: "500",
+                    fontSize: "1.1rem",
+                    color: "var(--error-color)",
+                  }}
+                >
+                  {checkboxError}
+                </Typography>
+              )}
+            </Box>
+            <Modal
+              open={open}
+              onClose={handleClose}
+              aria-labelledby="modal-modal-title"
+              aria-describedby="modal-modal-description"
+            >
+              <Box sx={style} style={{ maxHeight: "80vh", overflowY: "auto" }}>
+                {/* <Typography
                 id="modal-modal-title"
                 variant="h6"
                 component="h2"
@@ -934,15 +984,19 @@ export default function CTAForm() {
               >
                 Privacy Policy Gomed
               </Typography> */}
-              {/* Render privacy policy HTML content directly inside Typography */}
-              <Typography
-                id="modal-modal-description"
-                sx={{ mt: 2, fontFamily: "Montserrat", fontSize: "1.6rem" }}
-                dangerouslySetInnerHTML={{ __html: privacy }}
-              />
-            </Box>
-          </Modal>
-        </Box>
+                {/* Render privacy policy HTML content directly inside Typography */}
+                <Typography
+                  id="modal-modal-description"
+                  sx={{ mt: 2, fontFamily: "Montserrat", fontSize: "1.6rem" }}
+                  dangerouslySetInnerHTML={{ __html: privacy }}
+                />
+              </Box>
+            </Modal>
+          </Box>
+
+          <input type="hidden" name="subject" value={subject} />
+          <input type="hidden" name="message" value={message} />
+        </form>
       </Paper>
     </Box>
   );

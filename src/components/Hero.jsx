@@ -194,6 +194,7 @@ export default function Hero() {
           {/* FORM */}
           <Box
             sx={{
+              zIndex: 901,
               alignSelf: "center",
               position: "absolute",
               top: { sm: "70%", md: "70%", lg: "82%" },

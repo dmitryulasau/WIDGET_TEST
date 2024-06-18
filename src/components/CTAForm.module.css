@@ -1,3 +1,8 @@
 .inputField {
   width: 100%;
 }
+
+form {
+  display: flex;
+  background: red;
+}
